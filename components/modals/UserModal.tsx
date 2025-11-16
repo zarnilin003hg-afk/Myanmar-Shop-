@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react';
 import type { User, UserRole } from '../../types';
 
 interface UserModalProps {
   user: User | null;
   onClose: () => void;
-  onSave: (user: User | Omit<User, '__backendId' | 'id' | 'created_at'>) => void;
+  onSave: (user: User | Omit<User, '__backendId'>) => void;
 }
 
 export const UserModal: React.FC<UserModalProps> = ({ user, onClose, onSave }) => {
@@ -40,12 +39,14 @@ export const UserModal: React.FC<UserModalProps> = ({ user, onClose, onSave }) =
         alert('Password is required for a new user.');
         return;
       }
-      const newUser: Omit<User, '__backendId' | 'id' | 'created_at'> = {
+      const newUser: Omit<User, '__backendId'> = {
+        id: `user_${Date.now()}`,
         username: formData.username,
         password: formData.password,
         role: formData.role,
         module: 'users',
         type: 'user',
+        created_at: new Date().toISOString(),
       };
       onSave(newUser);
     }
@@ -67,7 +68,9 @@ export const UserModal: React.FC<UserModalProps> = ({ user, onClose, onSave }) =
               <label className="block text-sm font-semibold mb-2 text-gray-700">ရာထူး</label>
               <select name="role" value={formData.role} onChange={handleChange} className="w-full px-4 py-2 border rounded-lg border-gray-300 bg-white">
                   <option value="Admin">Admin</option>
+                  <option value="Manager">Manager</option>
                   <option value="Cashier">Cashier</option>
+                  <option value="Analyst">Analyst</option>
               </select>
             </div>
             <div className="flex gap-3">

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback, useMemo, lazy, Suspense } from 'react';
 import { Header } from './Header';
 import { Modal } from './shared/Modal';
@@ -380,7 +379,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ user, onLogout, data, cr
                         return;
                     }
                     const isUpdate = '__backendId' in u;
-                    const result = isUpdate ? await update(u) : await create({ ...u, id: `user_${Date.now()}` });
+                    // FIX: Pass the user object directly, relying on UserModal to provide a complete object with id and created_at for new users. This resolves the missing `created_at` property error.
+                    const result = isUpdate ? await update(u) : await create(u);
                      if (result.isOk) {
                        addToast(isUpdate ? 'အသုံးပြုသူ ပြင်ဆင်ပြီးပါပြီ' : 'အသုံးပြုသူ ထည့်သွင်းပြီးပါပြီ', 'success');
                        setModal({ type: null, data: null });

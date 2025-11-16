@@ -53,7 +53,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
     const [localSettings, setLocalSettings] = useState(settings);
     const [localTaxRate, setLocalTaxRate] = useState(taxRate);
 
-    if (currentUserRole !== 'Admin') {
+    if (currentUserRole !== 'Admin' && currentUserRole !== 'Manager') {
         return (
             <div className="h-full flex items-center justify-center text-center text-gray-500 p-6">
                 <div>
@@ -116,40 +116,42 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
                 <SettingsInput label="ဘောင်ချာအောက်ခြေစာသား" name="receiptFooter" value={localSettings.receiptFooter} onChange={handleSettingsChange} />
             </SettingsCard>
 
-            <SettingsCard title="👥 အသုံးပြုသူ စီမံခန့်ခွဲမှု">
-                <button
-                    onClick={() => openUserModal(null)}
-                    className="w-full px-4 py-3 rounded-lg font-semibold text-white bg-green-500 hover:bg-green-600 transition-colors mb-4"
-                >
-                    ➕ အသုံးပြုသူအသစ်ထည့်ရန်
-                </button>
-                <div className="space-y-2">
-                    {users.map(user => (
-                        <div key={user.__backendId} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border">
-                            <div>
-                                <div className="font-semibold text-gray-800">{user.username}</div>
-                                <div className="text-sm text-gray-500">{user.role}</div>
-                            </div>
-                            <div className="flex gap-2">
-                                <button 
-                                    onClick={() => openUserModal(user)}
-                                    className="p-2 rounded text-white bg-yellow-500 hover:bg-yellow-600"
-                                >
-                                    ✏️
-                                </button>
-                                <button 
-                                    onClick={() => deleteUser(user)} 
-                                    disabled={user.__backendId === currentUser.__backendId}
-                                    className="p-2 rounded text-white bg-red-500 hover:bg-red-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                                    title={user.__backendId === currentUser.__backendId ? 'ကိုယ့်အကောင့်ကို ဖျက်၍မရပါ' : 'Delete'}
-                                >
-                                    🗑️
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </SettingsCard>
+            {currentUserRole === 'Admin' && (
+              <SettingsCard title="👥 အသုံးပြုသူ စီမံခန့်ခွဲမှု">
+                  <button
+                      onClick={() => openUserModal(null)}
+                      className="w-full px-4 py-3 rounded-lg font-semibold text-white bg-green-500 hover:bg-green-600 transition-colors mb-4"
+                  >
+                      ➕ အသုံးပြုသူအသစ်ထည့်ရန်
+                  </button>
+                  <div className="space-y-2">
+                      {users.map(user => (
+                          <div key={user.__backendId} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border">
+                              <div>
+                                  <div className="font-semibold text-gray-800">{user.username}</div>
+                                  <div className="text-sm text-gray-500">{user.role}</div>
+                              </div>
+                              <div className="flex gap-2">
+                                  <button 
+                                      onClick={() => openUserModal(user)}
+                                      className="p-2 rounded text-white bg-yellow-500 hover:bg-yellow-600"
+                                  >
+                                      ✏️
+                                  </button>
+                                  <button 
+                                      onClick={() => deleteUser(user)} 
+                                      disabled={user.__backendId === currentUser.__backendId}
+                                      className="p-2 rounded text-white bg-red-500 hover:bg-red-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
+                                      title={user.__backendId === currentUser.__backendId ? 'ကိုယ့်အကောင့်ကို ဖျက်၍မရပါ' : 'Delete'}
+                                  >
+                                      🗑️
+                                  </button>
+                              </div>
+                          </div>
+                      ))}
+                  </div>
+              </SettingsCard>
+            )}
         </div>
         
         <div className="mt-8">

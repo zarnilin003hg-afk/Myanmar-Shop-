@@ -1,7 +1,7 @@
 
 
 export type Tab = 'pos' | 'inventory' | 'customers' | 'transactions' | 'reports' | 'suppliers' | 'settings' | 'finance';
-export type UserRole = 'Admin' | 'Cashier';
+export type UserRole = 'Admin' | 'Manager' | 'Cashier' | 'Analyst';
 
 export interface Settings {
   storeName: string;
