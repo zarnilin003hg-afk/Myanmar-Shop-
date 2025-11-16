@@ -10,7 +10,7 @@ interface ConfirmationModalProps {
 
 export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({ title, message, onConfirm, onCancel }) => {
   return (
-    <div style={{maxWidth: '400px', width: '100%'}}>
+    <div>
       <h3 className="text-xl font-bold mb-4 text-gray-800">{title}</h3>
       <p className="mb-6 text-gray-600">{message}</p>
       <div className="flex gap-3">

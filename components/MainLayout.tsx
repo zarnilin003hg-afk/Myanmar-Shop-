@@ -47,6 +47,21 @@ interface MainLayoutProps {
   deleteItem: (item: AnyData) => Promise<{ isOk: boolean }>;
 }
 
+const modalSizes: { [key in ModalState['type']]?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' } = {
+    product: 'xl',
+    customer: 'lg',
+    supplier: '2xl',
+    user: 'md',
+    checkout: 'md',
+    discount: 'sm',
+    receipt: 'lg',
+    transaction_detail: 'lg',
+    return: 'xl',
+    price_history: 'md',
+    confirm_delete: 'sm',
+    confirm_clear_cart: 'sm',
+};
+
 export const MainLayout: React.FC<MainLayoutProps> = ({ user, onLogout, data, create, update, deleteItem }) => {
   const [activeTab, setActiveTab] = useState<Tab>('pos');
   const [cart, setCart] = useState<CartItem[]>([]);
@@ -275,6 +290,10 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ user, onLogout, data, cr
                   products={products}
                   onClose={() => setModal({ type: null, data: null })} 
                   onSave={async (p) => {
+                    if (currentUserRole !== 'Admin') {
+                      addToast('လုပ်ဆောင်ခွင့်မရှိပါ', 'error');
+                      return;
+                    }
                     const isUpdate = '__backendId' in p;
 
                     let result;
@@ -310,6 +329,10 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ user, onLogout, data, cr
                   customer={modal.data as Customer | null}
                   onClose={() => setModal({ type: null, data: null })}
                   onSave={async (c) => {
+                     if (currentUserRole !== 'Admin') {
+                        addToast('လုပ်ဆောင်ခွင့်မရှိပါ', 'error');
+                        return;
+                     }
                      const isUpdate = '__backendId' in c;
                      let result;
                      if (isUpdate) {
@@ -332,6 +355,10 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ user, onLogout, data, cr
                   supplier={modal.data as Supplier | null}
                   onClose={() => setModal({ type: null, data: null })}
                   onSave={async (s) => {
+                    if (currentUserRole !== 'Admin') {
+                        addToast('လုပ်ဆောင်ခွင့်မရှိပါ', 'error');
+                        return;
+                    }
                     const isUpdate = '__backendId' in s;
                     const result = isUpdate ? await update(s) : await create(s);
                      if (result.isOk) {
@@ -348,6 +375,10 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ user, onLogout, data, cr
                   user={modal.data as UserType | null}
                   onClose={() => setModal({ type: null, data: null })}
                   onSave={async (u) => {
+                    if (currentUserRole !== 'Admin') {
+                        addToast('လုပ်ဆောင်ခွင့်မရှိပါ', 'error');
+                        return;
+                    }
                     const isUpdate = '__backendId' in u;
                     const result = isUpdate ? await update(u) : await create({ ...u, id: `user_${Date.now()}` });
                      if (result.isOk) {
@@ -419,6 +450,11 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ user, onLogout, data, cr
                     title="အတည်ပြုပါ"
                     message={`ဤ ${getItemType(modal.data as AnyData)} ကို ဖျက်လိုသည်မှာ သေချာပါသလား?`}
                     onConfirm={async () => {
+                      if (currentUserRole !== 'Admin') {
+                        addToast('လုပ်ဆောင်ခွင့်မရှိပါ', 'error');
+                        setModal({type: null, data: null});
+                        return;
+                      }
                       const result = await deleteItem(modal.data as AnyData);
                       if (result.isOk) {
                           addToast('ဖျက်ပြီးပါပြီ', 'success');
@@ -551,7 +587,10 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ user, onLogout, data, cr
       </main>
       
       {modal.type && (
-        <Modal onClose={() => setModal({ type: null, data: null })}>
+        <Modal 
+          onClose={() => setModal({ type: null, data: null })} 
+          size={modalSizes[modal.type]}
+        >
           <Suspense fallback={<LoadingSpinner />}>
             {renderModalContent()}
           </Suspense>

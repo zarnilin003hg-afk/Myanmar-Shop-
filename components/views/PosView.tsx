@@ -65,12 +65,12 @@ export const PosView: React.FC<PosViewProps> = (props) => {
   return (
     <div className="h-full flex md:flex-row flex-col">
       <div className="flex-1 flex flex-col overflow-hidden bg-white">
-        <div className="p-4 border-b border-gray-200">
+        <div className="p-2 sm:p-4 border-b border-gray-200">
           <div className="mb-4 flex items-center gap-2">
             <input
               type="text"
-              placeholder="🔍 ကုန်ပစ္စည်းရှာရန် (အမည်၊ ကုဒ် သို့မဟုတ် ဘားကုဒ်)"
-              className="flex-1 w-full px-4 py-2 rounded-lg border-2 border-gray-300 text-base focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500"
+              placeholder="🔍 ကုန်ပစ္စည်းရှာရန်..."
+              className="flex-1 w-full px-4 py-2 rounded-lg border-2 border-gray-300 text-sm sm:text-base focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             />

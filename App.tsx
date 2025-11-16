@@ -1,69 +1,12 @@
 
 
-import React, { useState, useMemo, useEffect, lazy, Suspense } from 'react';
-// import { MainLayout } from './components/MainLayout';
+import React, { useState, useMemo, useEffect, lazy, Suspense, useCallback } from 'react';
 import { LoginView } from './components/views/LoginView';
 import type { User, AnyData } from './types';
 import { authenticate } from './auth';
-import { mockData as initialMockData } from './mockData';
+import { api } from './services/api';
 
 const MainLayout = lazy(() => import('./components/MainLayout').then(module => ({ default: module.MainLayout })));
-
-const LOCAL_STORAGE_KEY = 'myanmar-pos-pro-data';
-
-const usePersistentData = () => {
-  const [data, setData] = useState<AnyData[]>(() => {
-    try {
-      const storedData = window.localStorage.getItem(LOCAL_STORAGE_KEY);
-      if (storedData) {
-        return JSON.parse(storedData);
-      }
-    } catch (error) {
-      console.error("Error parsing data from localStorage", error);
-    }
-    // If no stored data, or if parsing fails, initialize with mock data.
-    return initialMockData;
-  });
-
-  // This effect runs whenever 'data' changes, and saves it to localStorage.
-  useEffect(() => {
-    try {
-      window.localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
-    } catch (error) {
-      console.error("Error saving data to localStorage", error);
-    }
-  }, [data]);
-
-  const create = async (item: Omit<AnyData, '__backendId' | 'id'> & { id?: string }) => {
-    return new Promise<{ isOk: boolean }>((resolve) => {
-      setTimeout(() => {
-        const newItem = { ...item, __backendId: `backend_${Date.now()}_${Math.random()}` } as AnyData;
-        setData(prev => [...prev, newItem]);
-        resolve({ isOk: true });
-      }, 200); // Reduced delay for better UX
-    });
-  };
-
-  const update = async (item: AnyData) => {
-    return new Promise<{ isOk: boolean }>((resolve) => {
-      setTimeout(() => {
-        setData(prev => prev.map(d => d.__backendId === item.__backendId ? item : d));
-        resolve({ isOk: true });
-      }, 200);
-    });
-  };
-
-  const del = async (item: AnyData) => {
-    return new Promise<{ isOk: boolean }>((resolve) => {
-      setTimeout(() => {
-        setData(prev => prev.filter(d => d.__backendId !== item.__backendId));
-        resolve({ isOk: true });
-      }, 200);
-    });
-  };
-
-  return { data, create, update, delete: del };
-};
 
 const FullPageSpinner = () => (
     <div className="h-screen w-screen flex items-center justify-center bg-gray-100">
@@ -74,7 +17,25 @@ const FullPageSpinner = () => (
 
 export default function App() {
   const [user, setUser] = useState<User | null>(null);
-  const { data, create, update, delete: deleteItem } = usePersistentData();
+  const [data, setData] = useState<AnyData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const serverData = await api.getData();
+        setData(serverData);
+      } catch (err) {
+        setError("Failed to load data.");
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   const users = useMemo(() => data.filter((d): d is User => d.module === 'users'), [data]);
 
@@ -90,7 +51,48 @@ export default function App() {
   const handleLogout = () => {
     setUser(null);
   };
+  
+  const createItem = useCallback(async (item: Omit<AnyData, '__backendId' | 'id'> & { id?: string }) => {
+    try {
+        const newItem = await api.createItem(item);
+        setData(prev => [...prev, newItem]);
+        return { isOk: true };
+    } catch (e) {
+        console.error("Failed to create item", e);
+        return { isOk: false };
+    }
+  }, []);
 
+  const updateItem = useCallback(async (item: AnyData) => {
+    try {
+        const updatedItem = await api.updateItem(item);
+        setData(prev => prev.map(d => d.__backendId === updatedItem.__backendId ? updatedItem : d));
+        return { isOk: true };
+    } catch (e) {
+        console.error("Failed to update item", e);
+        return { isOk: false };
+    }
+  }, []);
+  
+  const deleteItem = useCallback(async (item: AnyData) => {
+    try {
+        const { __backendId } = await api.deleteItem(item);
+        setData(prev => prev.filter(d => d.__backendId !== __backendId));
+        return { isOk: true };
+    } catch (e) {
+        console.error("Failed to delete item", e);
+        return { isOk: false };
+    }
+  }, []);
+
+  if (isLoading) {
+    return <FullPageSpinner />;
+  }
+
+  if (error) {
+    return <div className="h-screen w-screen flex items-center justify-center bg-red-100 text-red-700">{error}</div>;
+  }
+  
   if (!user) {
     return <LoginView onLogin={handleLogin} />;
   }
@@ -101,8 +103,8 @@ export default function App() {
         user={user}
         onLogout={handleLogout}
         data={data}
-        create={create}
-        update={update}
+        create={createItem}
+        update={updateItem}
         deleteItem={deleteItem}
       />
     </Suspense>

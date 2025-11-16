@@ -41,7 +41,7 @@ export const CustomerModal: React.FC<CustomerModalProps> = ({ customer, onClose,
   };
 
   return (
-    <div style={{maxWidth: '500px', width: '100%'}}>
+    <div>
         <h3 className="text-2xl font-bold mb-6 text-gray-800">{isEdit ? 'ဝယ်ယူသူပြင်ဆင်ရန်' : 'ဝယ်ယူသူအသစ်ထည့်ရန်'}</h3>
         <form onSubmit={handleSubmit}>
             {isEdit && (

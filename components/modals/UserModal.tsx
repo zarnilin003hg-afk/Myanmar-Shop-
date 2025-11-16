@@ -52,7 +52,7 @@ export const UserModal: React.FC<UserModalProps> = ({ user, onClose, onSave }) =
   };
 
   return (
-    <div style={{maxWidth: '500px', width: '100%'}}>
+    <div>
         <h3 className="text-2xl font-bold mb-6 text-gray-800">{isEdit ? 'အသုံးပြုသူ ပြင်ဆင်ရန်' : 'အသုံးပြုသူအသစ်ထည့်ရန်'}</h3>
         <form onSubmit={handleSubmit}>
             <div className="mb-4">

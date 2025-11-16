@@ -33,7 +33,7 @@ export const DiscountModal: React.FC<DiscountModalProps> = ({ currentDiscount, c
   };
 
   return (
-    <div style={{maxWidth: '400px', width: '100%'}}>
+    <div>
       <h3 className="text-2xl font-bold mb-6 text-gray-800">💰 လျှော့စျေး / အမှတ်သုံးရန်</h3>
       
       {selectedCustomer && points > 0 && (

@@ -45,7 +45,7 @@ export const Header: React.FC<HeaderProps> = ({ storeName, activeTab, setActiveT
 
   return (
     <header className="shadow-md text-white" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
-      <div className="px-6 py-4 flex items-center justify-between">
+      <div className="px-4 sm:px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="text-3xl">🏪</div>
           <div>
@@ -77,7 +77,7 @@ export const Header: React.FC<HeaderProps> = ({ storeName, activeTab, setActiveT
       <div
         role="tablist"
         aria-label="Main navigation tabs"
-        className="px-6 pb-4 flex gap-3 overflow-x-auto"
+        className="px-4 sm:px-6 pb-4 flex gap-3 overflow-x-auto"
       >
         {tabs.map(tab => (
           <TabButton

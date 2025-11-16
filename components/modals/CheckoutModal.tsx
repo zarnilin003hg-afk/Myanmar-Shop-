@@ -74,7 +74,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ cart, discount, ta
   };
   
   return (
-    <div style={{maxWidth: '500px', width: '100%'}}>
+    <div>
       <h3 className="text-2xl font-bold mb-6 text-gray-800">💳 ငွေရှင်းရန်</h3>
       
       <div className="space-y-4 mb-6">

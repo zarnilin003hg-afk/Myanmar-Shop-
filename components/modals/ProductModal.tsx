@@ -215,7 +215,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, suppliers, 
           onClose={() => setIsScanning(false)}
         />
       )}
-      <div style={{maxWidth: '600px', width: '100%'}}>
+      <div>
         <h3 className="text-2xl font-bold mb-6 text-gray-800">{isEdit ? 'ကုန်ပစ္စည်းပြင်ဆင်ရန်' : 'ကုန်ပစ္စည်းအသစ်ထည့်ရန်'}</h3>
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">

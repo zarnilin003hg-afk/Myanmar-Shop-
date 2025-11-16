@@ -31,7 +31,7 @@ export const TransactionDetailModal: React.FC<TransactionDetailModalProps> = ({ 
 
 
   return (
-    <div style={{maxWidth: '500px', width: '100%'}}>
+    <div>
       <h3 className="text-2xl font-bold mb-6 text-gray-800">📊 Transaction အသေးစိတ်</h3>
       
       <div className="mb-4 p-4 rounded-lg bg-gray-50">

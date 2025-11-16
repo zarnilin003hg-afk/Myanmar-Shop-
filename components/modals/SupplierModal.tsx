@@ -123,14 +123,14 @@ export const SupplierModal: React.FC<SupplierModalProps> = ({ supplier, onClose,
   };
 
   return (
-    <div style={{maxWidth: '700px', width: '100%'}}>
+    <div>
       <h3 className="text-2xl font-bold mb-6 text-gray-800">{isEdit ? '🏭 ပေးသွင်းသူပြင်ဆင်ရန်' : '🏭 ပေးသွင်းသူအသစ်ထည့်ရန်'}</h3>
       <form onSubmit={handleSubmit}>
         {/* Basic Info */}
         <div className="mb-4">
           <input type="text" name="supplier_name" value={formData.supplier_name} onChange={handleChange} required placeholder="ပေးသွင်းသူအမည် *" className={inputStyle} />
         </div>
-        <div className="grid grid-cols-2 gap-4 mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
           <input type="tel" name="supplier_phone" value={formData.supplier_phone} onChange={handleChange} required placeholder="ဖုန်းနံပါတ် *" className={inputStyle} />
           <input type="email" name="supplier_email" value={formData.supplier_email} onChange={handleChange} placeholder="အီးမေးလ်" className={inputStyle} />
         </div>

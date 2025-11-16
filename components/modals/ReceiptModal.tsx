@@ -24,7 +24,7 @@ export const ReceiptModal: React.FC<ReceiptModalProps> = ({ transaction, setting
   };
 
   return (
-    <div style={{ width: 'auto', minWidth: '300px' }}>
+    <div className="w-full">
       <div className="mb-4 flex justify-center gap-2 p-1 bg-gray-200 rounded-lg no-print">
         <button
           onClick={() => setFormat('thermal')}
@@ -40,7 +40,7 @@ export const ReceiptModal: React.FC<ReceiptModalProps> = ({ transaction, setting
         </button>
       </div>
 
-      <div id="printable-receipt" className={`bg-white p-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-800 transition-all duration-300 ${formatClasses[format]} ${format}-format`}>
+      <div id="printable-receipt" className={`bg-white p-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-800 transition-all duration-300 mx-auto ${formatClasses[format]} ${format}-format`}>
         <div className="text-center mb-4">
           <div className={`${format === 'thermal' ? 'text-lg' : 'text-2xl'} font-bold`}>{settings.storeName}</div>
           <div className={`${format === 'thermal' ? 'text-base' : 'text-lg'} font-semibold text-gray-700`}>ငွေရှင်းဘောင်ချာ</div>

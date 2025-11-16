@@ -77,7 +77,7 @@ export const ReturnModal: React.FC<ReturnModalProps> = ({ transaction, onClose, 
   };
 
   return (
-    <div style={{ maxWidth: '600px', width: '100%' }}>
+    <div>
       <h3 className="text-2xl font-bold mb-4 text-gray-800">↩️ ပစ္စည်းပြန်သွင်းခြင်း</h3>
       <p className="text-sm text-gray-500 mb-6">မူရင်း Transaction ID: {transaction.transaction_id}</p>
       

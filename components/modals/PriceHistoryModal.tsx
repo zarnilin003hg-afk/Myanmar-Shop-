@@ -27,7 +27,7 @@ export const PriceHistoryModal: React.FC<PriceHistoryModalProps> = ({ product, o
   }, [product.price_history]);
 
   return (
-    <div style={{ maxWidth: '500px', width: '100%' }}>
+    <div>
       <h3 className="text-2xl font-bold mb-2 text-gray-800">📜 ဈေးနှုန်းမှတ်တမ်း</h3>
       <p className="text-base text-gray-600 mb-6 truncate">{product.product_name}</p>
       
