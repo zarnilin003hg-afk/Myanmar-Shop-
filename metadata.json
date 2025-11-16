@@ -1,0 +1,7 @@
+{
+  "name": "Myanmar POS & Inventory Pro",
+  "description": "A comprehensive Point of Sale (POS) and Inventory Management system designed for retail businesses in Myanmar. It features modules for sales, inventory tracking, customer management, transaction history, supplier relations, and insightful reports, all with a user-friendly interface in the Myanmar language.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

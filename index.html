@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Myanmar POS & Inventory Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @media print {
+        /* Hide everything by default */
+        body * {
+          visibility: hidden;
+        }
+        /* Make the printable areas and their children visible */
+        #printable-receipt, #printable-receipt *,
+        #printable-transaction-report, #printable-transaction-report * {
+          visibility: visible;
+        }
+        /* Position the printable areas at the top of the page */
+        #printable-receipt, #printable-transaction-report {
+          position: absolute;
+          left: 0;
+          top: 0;
+          border: none !important;
+          box-shadow: none !important;
+          padding: 0 !important;
+          margin: 0 !important;
+          width: 100%;
+        }
+        /* Thermal Printer Styles (80mm) */
+        #printable-receipt.thermal-format {
+          width: 76mm;
+          font-size: 10pt;
+        }
+        /* A4 Styles */
+        #printable-receipt.a4-format {
+          width: 100%;
+          font-size: 12pt;
+          padding: 20mm !important; /* Add padding for A4 */
+        }
+        /* Transaction Report Styles */
+        #printable-transaction-report {
+            padding: 20mm !important;
+            font-size: 10pt;
+        }
+        #printable-transaction-report table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        #printable-transaction-report th, #printable-transaction-report td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        #printable-transaction-report th {
+            background-color: #f2f2f2;
+        }
+         /* Hide elements that should not be printed */
+        .no-print {
+          display: none !important;
+        }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.1"
+  }
+}
+</script>
+</head>
+  <body class="bg-gray-50">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
