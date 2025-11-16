@@ -64,13 +64,13 @@ export const PosView: React.FC<PosViewProps> = (props) => {
 
   return (
     <div className="h-full flex md:flex-row flex-col">
-      <div className="flex-1 flex flex-col overflow-hidden bg-white">
-        <div className="p-2 sm:p-4 border-b border-gray-200">
+      <div className="flex-1 flex flex-col overflow-hidden bg-white dark:bg-gray-800">
+        <div className="p-2 sm:p-4 border-b border-gray-200 dark:border-gray-700">
           <div className="mb-4 flex items-center gap-2">
             <input
               type="text"
               placeholder="🔍 ကုန်ပစ္စည်းရှာရန်..."
-              className="flex-1 w-full px-4 py-2 rounded-lg border-2 border-gray-300 text-sm sm:text-base focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500"
+              className="flex-1 w-full px-4 py-2 rounded-lg border-2 border-gray-300 text-sm sm:text-base focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             />
@@ -97,7 +97,7 @@ export const PosView: React.FC<PosViewProps> = (props) => {
                 className={`px-4 py-2 rounded-lg font-semibold whitespace-nowrap transition-all duration-200 ${
                   selectedCategory === cat
                     ? 'bg-blue-500 text-white shadow-md'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500'
                 }`}
                 onClick={() => setSelectedCategory(cat)}
               >
@@ -110,7 +110,7 @@ export const PosView: React.FC<PosViewProps> = (props) => {
       </div>
 
       {/* Desktop Cart */}
-      <div className="w-96 hidden md:flex flex-col border-l bg-gray-50 border-gray-200">
+      <div className="w-96 hidden md:flex flex-col border-l bg-gray-50 border-gray-200 dark:bg-gray-900 dark:border-gray-700">
         <Cart {...props} />
       </div>
 
@@ -134,7 +134,7 @@ export const PosView: React.FC<PosViewProps> = (props) => {
           onClick={() => setIsCartVisible(false)}
         >
            <div 
-             className="fixed inset-y-0 right-0 w-full max-w-sm bg-gray-50 shadow-xl flex flex-col animate-[slideInRight_0.3s_ease-out]"
+             className="fixed inset-y-0 right-0 w-full max-w-sm bg-gray-50 dark:bg-gray-900 shadow-xl flex flex-col animate-[slideInRight_0.3s_ease-out]"
              onClick={(e) => e.stopPropagation()}
            >
              <Cart {...props} closeCart={() => setIsCartVisible(false)} />

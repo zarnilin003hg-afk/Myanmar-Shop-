@@ -25,7 +25,7 @@ const SalesChart: React.FC<{ transactions: Transaction[] }> = ({ transactions })
 
   if (transactions.length === 0) {
     return (
-      <div className="h-64 flex items-center justify-center text-gray-500">
+      <div className="h-64 flex items-center justify-center text-gray-500 dark:text-gray-400">
         <div>
           <div className="text-4xl mb-2">📊</div>
           <div>ဒေတာမရှိသေးပါ</div>
@@ -41,7 +41,7 @@ const SalesChart: React.FC<{ transactions: Transaction[] }> = ({ transactions })
         const dayName = dayNames[new Date(last7Days[index]).getUTCDay()];
         return (
           <div key={index} className="flex flex-col items-center gap-2 flex-1 group">
-            <div className="text-xs font-semibold text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className="text-xs font-semibold text-gray-600 dark:text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity">
               {sale.toLocaleString()}
             </div>
             <div
@@ -49,7 +49,7 @@ const SalesChart: React.FC<{ transactions: Transaction[] }> = ({ transactions })
               style={{ height: height }}
               title={`${last7Days[index]}: ${sale.toLocaleString()} ကျပ်`}
             />
-            <span className="text-xs text-gray-600">{dayName}</span>
+            <span className="text-xs text-gray-600 dark:text-gray-400">{dayName}</span>
           </div>
         );
       })}
@@ -77,7 +77,7 @@ const TopProducts: React.FC<{ transactions: Transaction[] }> = ({ transactions }
 
   if (topProducts.length === 0) {
     return (
-      <div className="text-center py-8 text-gray-500">
+      <div className="text-center py-8 text-gray-500 dark:text-gray-400">
         <div className="text-4xl mb-2">🏆</div>
         <div>ဒေတာမရှိသေးပါ</div>
       </div>
@@ -88,13 +88,13 @@ const TopProducts: React.FC<{ transactions: Transaction[] }> = ({ transactions }
   return (
     <div className="space-y-3">
       {topProducts.map((product, index) => (
-        <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-gray-50">
+        <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
           <div className="text-2xl">{icons[index]}</div>
           <div className="flex-1">
-            <div className="font-semibold text-gray-800">{product.name}</div>
-            <div className="text-sm text-gray-600">{product.quantity} ခု ရောင်းချပြီး</div>
+            <div className="font-semibold text-gray-800 dark:text-gray-100">{product.name}</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">{product.quantity} ခု ရောင်းချပြီး</div>
           </div>
-          <div className="font-bold text-green-600">{product.revenue.toLocaleString()} ကျပ်</div>
+          <div className="font-bold text-green-600 dark:text-green-400">{product.revenue.toLocaleString()} ကျပ်</div>
         </div>
       ))}
     </div>
@@ -115,7 +115,7 @@ const PaymentMethodsChart: React.FC<{ transactions: Transaction[] }> = ({ transa
 
     if (Object.keys(paymentMethods).length === 0) {
         return (
-            <div className="col-span-full text-center py-8 text-gray-500">
+            <div className="col-span-full text-center py-8 text-gray-500 dark:text-gray-400">
                 <div className="text-4xl mb-2">💳</div>
                 <div>ဒေတာမရှိသေးပါ</div>
             </div>
@@ -126,11 +126,11 @@ const PaymentMethodsChart: React.FC<{ transactions: Transaction[] }> = ({ transa
     return (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {Object.entries(paymentMethods).map(([method, data]) => (
-                <div key={method} className="rounded-lg shadow p-4 bg-white text-center transition-shadow hover:shadow-lg">
+                <div key={method} className="rounded-lg shadow p-4 bg-white dark:bg-gray-700 text-center transition-shadow hover:shadow-lg">
                     <div className="text-3xl mb-2">{icons[method] || '💰'}</div>
-                    <div className="font-semibold mb-1 text-gray-800">{method}</div>
-                    <div className="text-sm mb-1 text-gray-600">{data.count} ကြိမ်</div>
-                    <div className="font-bold text-blue-600">{data.amount.toLocaleString()} ကျပ်</div>
+                    <div className="font-semibold mb-1 text-gray-800 dark:text-gray-100">{method}</div>
+                    <div className="text-sm mb-1 text-gray-600 dark:text-gray-400">{data.count} ကြိမ်</div>
+                    <div className="font-bold text-blue-600 dark:text-blue-400">{data.amount.toLocaleString()} ကျပ်</div>
                 </div>
             ))}
         </div>
@@ -159,11 +159,11 @@ export const ReportsView: React.FC<ReportsViewProps> = ({ transactions, products
   const totalProfit = totalRevenue - totalCost;
 
   return (
-    <div className="h-full overflow-y-auto p-6 bg-gray-100">
+    <div className="h-full overflow-y-auto p-6 bg-gray-100 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto">
         <div className="mb-6">
-          <h2 className="text-3xl font-bold mb-2 text-gray-800">📈 အစီရင်ခံစာနှင့် ခွဲခြမ်းစိတ်ဖြာချက်</h2>
-          <p className="text-gray-600">လုပ်ငန်းစွမ်းဆောင်ရည် ခြုံငုံသုံးသပ်ချက်</p>
+          <h2 className="text-3xl font-bold mb-2 text-gray-800 dark:text-gray-100">📈 အစီရင်ခံစာနှင့် ခွဲခြမ်းစိတ်ဖြာချက်</h2>
+          <p className="text-gray-600 dark:text-gray-400">လုပ်ငန်းစွမ်းဆောင်ရည် ခြုံငုံသုံးသပ်ချက်</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -173,18 +173,18 @@ export const ReportsView: React.FC<ReportsViewProps> = ({ transactions, products
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <div className="rounded-xl shadow-md p-6 bg-white">
-            <h3 className="text-lg font-bold mb-4 text-gray-800">လတ်တလောအရောင်း (7 ရက်)</h3>
+          <div className="rounded-xl shadow-md p-6 bg-white dark:bg-gray-800">
+            <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-gray-100">လတ်တလောအရောင်း (7 ရက်)</h3>
             <SalesChart transactions={transactions} />
           </div>
-          <div className="rounded-xl shadow-md p-6 bg-white">
-            <h3 className="text-lg font-bold mb-4 text-gray-800">လူကြိုက်များသော ကုန်ပစ္စည်း (Top 5)</h3>
+          <div className="rounded-xl shadow-md p-6 bg-white dark:bg-gray-800">
+            <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-gray-100">လူကြိုက်များသော ကုန်ပစ္စည်း (Top 5)</h3>
             <TopProducts transactions={transactions} />
           </div>
         </div>
 
-        <div className="rounded-xl shadow-md p-6 bg-white">
-          <h3 className="text-lg font-bold mb-4 text-gray-800">ငွေပေးချေမှုနည်းလမ်းများ</h3>
+        <div className="rounded-xl shadow-md p-6 bg-white dark:bg-gray-800">
+          <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-gray-100">ငွေပေးချေမှုနည်းလမ်းများ</h3>
           <PaymentMethodsChart transactions={transactions} />
         </div>
       </div>

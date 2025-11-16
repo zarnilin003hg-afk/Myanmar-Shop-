@@ -78,17 +78,17 @@ export const ReturnModal: React.FC<ReturnModalProps> = ({ transaction, onClose, 
 
   return (
     <div>
-      <h3 className="text-2xl font-bold mb-4 text-gray-800">↩️ ပစ္စည်းပြန်သွင်းခြင်း</h3>
-      <p className="text-sm text-gray-500 mb-6">မူရင်း Transaction ID: {transaction.transaction_id}</p>
+      <h3 className="text-2xl font-bold mb-4 text-gray-800 dark:text-gray-100">↩️ ပစ္စည်းပြန်သွင်းခြင်း</h3>
+      <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">မူရင်း Transaction ID: {transaction.transaction_id}</p>
       
       <div className="mb-4">
-        <h4 className="font-semibold text-gray-700 mb-2">ပြန်သွင်းမည့် ပစ္စည်းများ</h4>
-        <div className="space-y-2 max-h-60 overflow-y-auto border rounded-lg p-2 bg-gray-50">
+        <h4 className="font-semibold text-gray-700 dark:text-gray-300 mb-2">ပြန်သွင်းမည့် ပစ္စည်းများ</h4>
+        <div className="space-y-2 max-h-60 overflow-y-auto border rounded-lg p-2 bg-gray-50 dark:bg-gray-900/50 dark:border-gray-700">
           {originalItems.map(item => (
-            <div key={item.product_code} className="flex items-center justify-between p-3 bg-white rounded-md shadow-sm">
+            <div key={item.product_code} className="flex items-center justify-between p-3 bg-white dark:bg-gray-800 rounded-md shadow-sm">
               <div>
-                <div className="font-semibold text-gray-800">{item.product_name}</div>
-                <div className="text-sm text-gray-500">မူလဝယ်ယူ: {item.quantity} ခု (တစ်ခုလျှင် {item.price.toLocaleString()} ကျပ်)</div>
+                <div className="font-semibold text-gray-800 dark:text-gray-200">{item.product_name}</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">မူလဝယ်ယူ: {item.quantity} ခု (တစ်ခုလျှင် {item.price.toLocaleString()} ကျပ်)</div>
               </div>
               <div className="flex items-center gap-2">
                 <input
@@ -97,7 +97,7 @@ export const ReturnModal: React.FC<ReturnModalProps> = ({ transaction, onClose, 
                   max={item.quantity}
                   value={returnQuantities[item.product_code] || 0}
                   onChange={(e) => handleQuantityChange(item.product_code, parseInt(e.target.value) || 0)}
-                  className="w-20 p-2 border border-gray-300 rounded-lg text-center"
+                  className="w-20 p-2 border border-gray-300 rounded-lg text-center dark:bg-gray-700 dark:border-gray-600"
                 />
               </div>
             </div>
@@ -105,33 +105,33 @@ export const ReturnModal: React.FC<ReturnModalProps> = ({ transaction, onClose, 
         </div>
       </div>
       
-      <div className="p-4 rounded-lg bg-blue-50 border border-blue-200 mb-6">
+      <div className="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/50 border border-blue-200 dark:border-blue-800 mb-6">
         <div className="flex justify-between items-center">
-            <span className="font-bold text-lg text-blue-800">ပြန်အမ်းငွေ စုစုပေါင်း:</span>
-            <span className="font-bold text-2xl text-blue-800">{totalRefundAmount.toLocaleString()} ကျပ်</span>
+            <span className="font-bold text-lg text-blue-800 dark:text-blue-200">ပြန်အမ်းငွေ စုစုပေါင်း:</span>
+            <span className="font-bold text-2xl text-blue-800 dark:text-blue-200">{totalRefundAmount.toLocaleString()} ကျပ်</span>
         </div>
       </div>
 
       <div className="mb-4">
-        <label className="block text-sm font-semibold mb-2 text-gray-700">အကြောင်းအရင်း (Optional)</label>
+        <label className="block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300">အကြောင်းအရင်း (Optional)</label>
         <input 
           type="text"
           value={reason}
           onChange={(e) => setReason(e.target.value)}
           placeholder="ဥပမာ: ပစ္စည်းမှားယွင်း"
-          className="w-full px-4 py-2 border rounded-lg border-gray-300"
+          className="w-full px-4 py-2 border rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600"
         />
       </div>
 
       <div className="mb-6">
-        <label className="flex items-center gap-3 p-3 rounded-lg bg-gray-100 cursor-pointer">
+        <label className="flex items-center gap-3 p-3 rounded-lg bg-gray-100 dark:bg-gray-700 cursor-pointer">
           <input
             type="checkbox"
             checked={restock}
             onChange={(e) => setRestock(e.target.checked)}
-            className="h-5 w-5 rounded text-blue-600 focus:ring-blue-500"
+            className="h-5 w-5 rounded text-blue-600 focus:ring-blue-500 bg-gray-200 dark:bg-gray-600 border-gray-300 dark:border-gray-500"
           />
-          <span className="font-semibold text-gray-700">ပစ္စည်းကို လက်ကျန်စာရင်းသို့ ပြန်ထည့်မည်</span>
+          <span className="font-semibold text-gray-700 dark:text-gray-200">ပစ္စည်းကို လက်ကျန်စာရင်းသို့ ပြန်ထည့်မည်</span>
         </label>
       </div>
 
@@ -139,7 +139,7 @@ export const ReturnModal: React.FC<ReturnModalProps> = ({ transaction, onClose, 
         <button onClick={handleSubmit} className="flex-1 px-6 py-3 rounded-lg font-bold text-white bg-orange-500 hover:bg-orange-600">
           ✓ ပြန်သွင်းခြင်း အတည်ပြုမည်
         </button>
-        <button type="button" onClick={onClose} className="px-6 py-3 rounded-lg font-semibold bg-gray-200 text-gray-700 hover:bg-gray-300">
+        <button type="button" onClick={onClose} className="px-6 py-3 rounded-lg font-semibold bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500">
           ပယ်ဖျက်မည်
         </button>
       </div>

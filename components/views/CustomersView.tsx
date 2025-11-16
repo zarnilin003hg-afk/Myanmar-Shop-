@@ -52,12 +52,12 @@ export const CustomersView: React.FC<CustomersViewProps> = ({ customers, openMod
   }, [customers, searchQuery]);
 
   return (
-    <div className="h-full overflow-y-auto p-4 md:p-6 bg-gray-100">
+    <div className="h-full overflow-y-auto p-4 md:p-6 bg-gray-100 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-800">👥 ဝယ်ယူသူများ</h2>
-            <p className="hidden md:block text-gray-600">သင့်ဝယ်ယူသူများ၏ အချက်အလက်နှင့် သမိုင်း</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-800 dark:text-gray-100">👥 ဝယ်ယူသူများ</h2>
+            <p className="hidden md:block text-gray-600 dark:text-gray-400">သင့်ဝယ်ယူသူများ၏ အချက်အလက်နှင့် သမိုင်း</p>
           </div>
           {currentUserRole === 'Admin' && (
             <button
@@ -71,9 +71,9 @@ export const CustomersView: React.FC<CustomersViewProps> = ({ customers, openMod
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <StatCard title="စုစုပေါင်းဝယ်ယူသူ" value={customers.length.toString()} color="plain" titleColor="text-gray-600" valueColor="text-gray-800"/>
-          <StatCard title="ဒီလအသစ်" value={newThisMonth.toString()} color="plain" titleColor="text-gray-600" valueColor="text-blue-500"/>
-          <StatCard title="စုစုပေါင်းဝယ်ယူမှု" value={`${totalPurchases.toLocaleString()}`} unit="ကျပ်" color="plain" titleColor="text-gray-600" valueColor="text-green-500"/>
+          <StatCard title="စုစုပေါင်းဝယ်ယူသူ" value={customers.length.toString()} color="plain" titleColor="text-gray-600 dark:text-gray-400" valueColor="text-gray-800 dark:text-gray-100"/>
+          <StatCard title="ဒီလအသစ်" value={newThisMonth.toString()} color="plain" titleColor="text-gray-600 dark:text-gray-400" valueColor="text-blue-500 dark:text-blue-400"/>
+          <StatCard title="စုစုပေါင်းဝယ်ယူမှု" value={`${totalPurchases.toLocaleString()}`} unit="ကျပ်" color="plain" titleColor="text-gray-600 dark:text-gray-400" valueColor="text-green-500 dark:text-green-400"/>
         </div>
         
         <div className="mb-6">
@@ -82,40 +82,40 @@ export const CustomersView: React.FC<CustomersViewProps> = ({ customers, openMod
             placeholder="🔍 ဝယ်ယူသူရှာရန် (အမည်၊ ဖုန်း၊ အီးမေးလ်)..."
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            className="w-full max-w-lg px-4 py-3 rounded-xl border-2 border-gray-300 focus:ring-blue-500 focus:border-blue-500 transition-shadow focus:shadow-lg"
+            className="w-full max-w-lg px-4 py-3 rounded-xl border-2 border-gray-300 focus:ring-blue-500 focus:border-blue-500 transition-shadow focus:shadow-lg dark:bg-gray-800 dark:border-gray-600 dark:text-white"
           />
         </div>
 
         {/* Desktop Table */}
-        <div className="rounded-xl shadow-md overflow-hidden bg-white hidden md:block">
+        <div className="rounded-xl shadow-md overflow-hidden bg-white dark:bg-gray-800 hidden md:block">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50">
+              <thead className="bg-gray-50 dark:bg-gray-700">
                 <tr>
                   {['အမည်', 'ဖုန်း', 'အီးမေးလ်', 'စုစုပေါင်းဝယ်ယူမှု', 'အမှတ်များ', 'နောက်ဆုံးဝယ်ယူ', currentUserRole === 'Admin' && 'လုပ်ဆောင်ချက်']
                     .filter(Boolean)
                     .map(h => (
-                    <th key={h as string} className="px-6 py-3 text-left text-sm font-semibold text-gray-600">{h}</th>
+                    <th key={h as string} className="px-6 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">{h}</th>
                   ))}
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="dark:text-gray-200">
                 {filteredCustomers.length === 0 ? (
                   <tr>
-                    <td colSpan={currentUserRole === 'Admin' ? 7 : 6} className="px-6 py-12 text-center text-gray-500">
+                    <td colSpan={currentUserRole === 'Admin' ? 7 : 6} className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
                       <div className="text-5xl mb-3">👥</div>
                       <div className="text-lg">{searchQuery ? 'ရှာဖွေမှုနှင့် ကိုက်ညီမှုမရှိပါ' : 'ဝယ်ယူသူမရှိသေးပါ'}</div>
                     </td>
                   </tr>
                 ) : (
                   filteredCustomers.map(c => (
-                    <tr key={c.__backendId} className="border-t hover:bg-gray-50">
-                      <td className="px-6 py-4 font-semibold text-gray-800">{c.customer_name}</td>
-                      <td className="px-6 py-4 text-gray-600">{c.customer_phone}</td>
-                      <td className="px-6 py-4 text-gray-600">{c.customer_email || '-'}</td>
-                      <td className="px-6 py-4 font-semibold text-green-600">{(c.total_purchases || 0).toLocaleString()} ကျပ်</td>
-                      <td className="px-6 py-4 font-bold text-blue-600">{c.loyalty_points || 0}</td>
-                      <td className="px-6 py-4 text-gray-600">{c.last_purchase ? new Date(c.last_purchase).toLocaleDateString('my-MM') : '-'}</td>
+                    <tr key={c.__backendId} className="border-t dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                      <td className="px-6 py-4 font-semibold text-gray-800 dark:text-gray-100">{c.customer_name}</td>
+                      <td className="px-6 py-4 text-gray-600 dark:text-gray-400">{c.customer_phone}</td>
+                      <td className="px-6 py-4 text-gray-600 dark:text-gray-400">{c.customer_email || '-'}</td>
+                      <td className="px-6 py-4 font-semibold text-green-600 dark:text-green-400">{(c.total_purchases || 0).toLocaleString()} ကျပ်</td>
+                      <td className="px-6 py-4 font-bold text-blue-600 dark:text-blue-400">{c.loyalty_points || 0}</td>
+                      <td className="px-6 py-4 text-gray-600 dark:text-gray-400">{c.last_purchase ? new Date(c.last_purchase).toLocaleDateString('my-MM') : '-'}</td>
                       {currentUserRole === 'Admin' && (
                         <td className="px-6 py-4">
                           <button onClick={() => openModal(c)} className="p-2 rounded text-white mr-2 bg-yellow-500 hover:bg-yellow-600">✏️</button>
@@ -133,27 +133,27 @@ export const CustomersView: React.FC<CustomersViewProps> = ({ customers, openMod
         {/* Mobile Card List */}
         <div className="md:hidden space-y-3">
           {filteredCustomers.length === 0 ? (
-              <div className="px-6 py-12 text-center text-gray-500 bg-white rounded-lg shadow">
+              <div className="px-6 py-12 text-center text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 rounded-lg shadow">
                 <div className="text-5xl mb-3">👥</div>
                 <div className="text-lg">{searchQuery ? 'ရှာဖွေမှုနှင့် ကိုက်ညီမှုမရှိပါ' : 'ဝယ်ယူသူမရှိသေးပါ'}</div>
               </div>
           ) : (
             filteredCustomers.map(c => (
-              <div key={c.__backendId} className="bg-white rounded-lg shadow p-4">
+              <div key={c.__backendId} className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
                 <div className="flex justify-between items-start mb-2">
                   <div>
-                    <div className="font-bold text-gray-800">{c.customer_name}</div>
-                    <div className="text-sm text-gray-500">{c.customer_phone}</div>
+                    <div className="font-bold text-gray-800 dark:text-gray-100">{c.customer_name}</div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">{c.customer_phone}</div>
                   </div>
                 </div>
-                <div className="border-t pt-2 space-y-1">
+                <div className="border-t dark:border-gray-700 pt-2 space-y-1">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-500">စုစုပေါင်းဝယ်ယူမှု:</span>
-                    <span className="font-semibold text-green-600">{(c.total_purchases || 0).toLocaleString()} ကျပ်</span>
+                    <span className="text-gray-500 dark:text-gray-400">စုစုပေါင်းဝယ်ယူမှု:</span>
+                    <span className="font-semibold text-green-600 dark:text-green-400">{(c.total_purchases || 0).toLocaleString()} ကျပ်</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-500">အမှတ်:</span>
-                    <span className="font-bold text-blue-600">{c.loyalty_points || 0}</span>
+                    <span className="text-gray-500 dark:text-gray-400">အမှတ်:</span>
+                    <span className="font-bold text-blue-600 dark:text-blue-400">{c.loyalty_points || 0}</span>
                   </div>
                 </div>
                 {currentUserRole === 'Admin' && (

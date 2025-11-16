@@ -144,12 +144,12 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ products, supplier
   };
 
   return (
-    <div className="h-full overflow-y-auto p-4 md:p-6 bg-gray-100">
+    <div className="h-full overflow-y-auto p-4 md:p-6 bg-gray-100 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-6">
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-800">📦 ကုန်ပစ္စည်းစာရင်း</h2>
-            <p className="hidden md:block text-gray-600">ကုန်ပစ္စည်းများကို ထည့်သွင်း၊ ပြင်ဆင်၊ ဖျက်ပါ</p>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-800 dark:text-gray-100">📦 ကုန်ပစ္စည်းစာရင်း</h2>
+            <p className="hidden md:block text-gray-600 dark:text-gray-400">ကုန်ပစ္စည်းများကို ထည့်သွင်း၊ ပြင်ဆင်၊ ဖျက်ပါ</p>
           </div>
           <div className="flex items-center gap-3">
             <button
@@ -185,20 +185,20 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ products, supplier
             placeholder="🔍 ကုန်ပစ္စည်းရှာရန် (အမည်၊ ကုဒ်၊ အမျိုးအစား၊ ဘားကုဒ်)..."
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            className="w-full max-w-lg px-4 py-3 rounded-xl border-2 border-gray-300 focus:ring-blue-500 focus:border-blue-500 transition-shadow focus:shadow-lg"
+            className="w-full max-w-lg px-4 py-3 rounded-xl border-2 border-gray-300 focus:ring-blue-500 focus:border-blue-500 transition-shadow focus:shadow-lg dark:bg-gray-800 dark:border-gray-600 dark:text-white"
           />
         </div>
 
         {/* Desktop Table */}
-        <div className="rounded-xl shadow-md overflow-hidden bg-white hidden md:block">
+        <div className="rounded-xl shadow-md overflow-hidden bg-white dark:bg-gray-800 hidden md:block">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gray-50">
+              <thead className="bg-gray-50 dark:bg-gray-700">
                 <tr>
                   {headers.map(header => (
-                      <th key={header.label} className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+                      <th key={header.label} className="px-6 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">
                           {header.sortable ? (
-                            <button onClick={() => requestSort(header.key!)} className="flex items-center gap-1 hover:text-gray-800 transition-colors">
+                            <button onClick={() => requestSort(header.key!)} className="flex items-center gap-1 hover:text-gray-800 dark:hover:text-white transition-colors">
                                 {header.label}
                                 <span className="text-xs w-3">{getSortIndicator(header.key!)}</span>
                             </button>
@@ -209,10 +209,10 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ products, supplier
                   ))}
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="dark:text-gray-200">
                 {displayProducts.length === 0 ? (
                   <tr>
-                    <td colSpan={9} className="px-6 py-12 text-center text-gray-500">
+                    <td colSpan={9} className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
                       <div className="text-5xl mb-3">📦</div>
                       <div className="text-lg">{searchQuery ? 'ရှာဖွေမှုနှင့် ကိုက်ညီမှုမရှိပါ' : 'ကုန်ပစ္စည်းမရှိသေးပါ'}</div>
                     </td>
@@ -221,11 +221,11 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ products, supplier
                   displayProducts.map(p => {
                     const supplier = suppliers.find(s => s.supplier_name === p.supplier);
                     return (
-                      <tr key={p.__backendId} className="border-t hover:bg-gray-50">
-                        <td className="px-6 py-4 text-gray-600">{p.product_code || '-'}</td>
-                        <td className="px-6 py-4 font-semibold text-gray-800">{p.product_name}</td>
-                        <td className="px-6 py-4 text-gray-600">{p.category}</td>
-                        <td className="px-6 py-4 text-gray-600">
+                      <tr key={p.__backendId} className="border-t dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                        <td className="px-6 py-4 text-gray-600 dark:text-gray-400">{p.product_code || '-'}</td>
+                        <td className="px-6 py-4 font-semibold text-gray-800 dark:text-gray-100">{p.product_name}</td>
+                        <td className="px-6 py-4 text-gray-600 dark:text-gray-400">{p.category}</td>
+                        <td className="px-6 py-4 text-gray-600 dark:text-gray-400">
                           {supplier ? (
                             <div>
                               <div className="font-semibold">{supplier.supplier_name}</div>
@@ -233,9 +233,9 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ products, supplier
                             </div>
                           ) : (p.supplier || '-')}
                         </td>
-                        <td className="px-6 py-4 text-gray-800">{p.quantity} {p.unit || 'ခု'}</td>
-                        <td className="px-6 py-4 text-gray-600">{p.cost.toLocaleString()} ကျပ်</td>
-                        <td className="px-6 py-4 font-semibold text-gray-800">{p.price.toLocaleString()} ကျပ်</td>
+                        <td className="px-6 py-4 text-gray-800 dark:text-gray-200">{p.quantity} {p.unit || 'ခု'}</td>
+                        <td className="px-6 py-4 text-gray-600 dark:text-gray-400">{p.cost.toLocaleString()} ကျပ်</td>
+                        <td className="px-6 py-4 font-semibold text-gray-800 dark:text-gray-200">{p.price.toLocaleString()} ကျပ်</td>
                         <td className="px-6 py-4">
                           <Badge color={p.quantity <= p.reorder_level ? 'danger' : 'success'}>
                             {p.quantity <= p.reorder_level ? 'နည်းနေသည်' : 'ပုံမှန်'}
@@ -262,7 +262,7 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ products, supplier
         {/* Mobile Card List */}
         <div className="md:hidden space-y-3">
           {displayProducts.length === 0 ? (
-             <div className="px-6 py-12 text-center text-gray-500 bg-white rounded-lg shadow">
+             <div className="px-6 py-12 text-center text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 rounded-lg shadow">
                 <div className="text-5xl mb-3">📦</div>
                 <div className="text-lg">{searchQuery ? 'ရှာဖွေမှုနှင့် ကိုက်ညီမှုမရှိပါ' : 'ကုန်ပစ္စည်းမရှိသေးပါ'}</div>
               </div>
@@ -270,31 +270,31 @@ export const InventoryView: React.FC<InventoryViewProps> = ({ products, supplier
             displayProducts.map(p => {
               const supplier = suppliers.find(s => s.supplier_name === p.supplier);
               return (
-                <div key={p.__backendId} className="bg-white rounded-lg shadow p-4">
+                <div key={p.__backendId} className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
                   <div className="flex justify-between items-start mb-2">
                     <div>
-                      <div className="font-bold text-gray-800">{p.product_name}</div>
-                      <div className="text-sm text-gray-500">{p.product_code} / {p.category}</div>
+                      <div className="font-bold text-gray-800 dark:text-gray-100">{p.product_name}</div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400">{p.product_code} / {p.category}</div>
                       {supplier && (
-                        <div className="text-xs text-gray-500 mt-1">🏭 {supplier.supplier_name} ({supplier.supplier_phone})</div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">🏭 {supplier.supplier_name} ({supplier.supplier_phone})</div>
                       )}
                     </div>
                     <Badge color={p.quantity <= p.reorder_level ? 'danger' : 'success'}>
                       {p.quantity <= p.reorder_level ? 'နည်းနေသည်' : 'ပုံမှန်'}
                     </Badge>
                   </div>
-                  <div className="border-t pt-2 space-y-1">
+                  <div className="border-t dark:border-gray-700 pt-2 space-y-1">
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-500">လက်ကျန်:</span>
-                      <span className="font-semibold text-gray-800">{p.quantity} {p.unit}</span>
+                      <span className="text-gray-500 dark:text-gray-400">လက်ကျန်:</span>
+                      <span className="font-semibold text-gray-800 dark:text-gray-200">{p.quantity} {p.unit}</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-500">ဝယ်ဈေး:</span>
-                      <span className="font-semibold text-gray-800">{p.cost.toLocaleString()} ကျပ်</span>
+                      <span className="text-gray-500 dark:text-gray-400">ဝယ်ဈေး:</span>
+                      <span className="font-semibold text-gray-800 dark:text-gray-200">{p.cost.toLocaleString()} ကျပ်</span>
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-gray-500">ရောင်းဈေး:</span>
-                      <span className="font-bold text-blue-600">{p.price.toLocaleString()} ကျပ်</span>
+                      <span className="text-gray-500 dark:text-gray-400">ရောင်းဈေး:</span>
+                      <span className="font-bold text-blue-600 dark:text-blue-400">{p.price.toLocaleString()} ကျပ်</span>
                     </div>
                   </div>
                   <div className="flex gap-2 mt-3">

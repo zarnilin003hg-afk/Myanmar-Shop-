@@ -10,7 +10,8 @@ interface SupplierModalProps {
   addToast: (message: string, type: 'success' | 'error' | 'info') => void;
 }
 
-const inputStyle = "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors";
+const inputStyle = "w-full px-4 py-2 border border-gray-300 dark:bg-gray-700 dark:border-gray-600 rounded-lg focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors";
+const labelStyle = "text-sm font-semibold mb-3 block text-gray-700 dark:text-gray-200";
 
 export const SupplierModal: React.FC<SupplierModalProps> = ({ supplier, onClose, onSave, addToast }) => {
   const [formData, setFormData] = useState({
@@ -124,7 +125,7 @@ export const SupplierModal: React.FC<SupplierModalProps> = ({ supplier, onClose,
 
   return (
     <div>
-      <h3 className="text-2xl font-bold mb-6 text-gray-800">{isEdit ? '🏭 ပေးသွင်းသူပြင်ဆင်ရန်' : '🏭 ပေးသွင်းသူအသစ်ထည့်ရန်'}</h3>
+      <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">{isEdit ? '🏭 ပေးသွင်းသူပြင်ဆင်ရန်' : '🏭 ပေးသွင်းသူအသစ်ထည့်ရန်'}</h3>
       <form onSubmit={handleSubmit}>
         {/* Basic Info */}
         <div className="mb-4">
@@ -140,10 +141,10 @@ export const SupplierModal: React.FC<SupplierModalProps> = ({ supplier, onClose,
         
         {/* Products List */}
         <div className="mb-4">
-          <label className="text-sm font-semibold mb-3 block text-gray-700">📦 ရောင်းချနိုင်သော ကုန်ပစ္စည်းအမျိုးအစားများ</label>
-          <div className="space-y-3 p-2 rounded-lg bg-gray-50 max-h-60 overflow-y-auto">
+          <label className={labelStyle}>📦 ရောင်းချနိုင်သော ကုန်ပစ္စည်းအမျိုးအစားများ</label>
+          <div className="space-y-3 p-2 rounded-lg bg-gray-50 dark:bg-gray-900/50 max-h-60 overflow-y-auto">
             {products.map((p, i) => (
-              <div key={i} className="flex gap-2 items-start p-3 bg-white rounded-lg border">
+              <div key={i} className="flex gap-2 items-start p-3 bg-white dark:bg-gray-800 rounded-lg border dark:border-gray-700">
                 <div className="flex-1 space-y-2 relative">
                   <input 
                     type="text" 
@@ -168,14 +169,14 @@ export const SupplierModal: React.FC<SupplierModalProps> = ({ supplier, onClose,
                     className={`${inputStyle} text-sm`}
                    />
                   {activeSuggestionIndex === i && (loadingSuggestions || suggestions.length > 0) && (
-                    <div className="absolute top-full z-10 w-full mt-1 bg-white border rounded-lg shadow-lg max-h-40 overflow-y-auto">
+                    <div className="absolute top-full z-10 w-full mt-1 bg-white dark:bg-gray-700 border dark:border-gray-600 rounded-lg shadow-lg max-h-40 overflow-y-auto">
                         {loadingSuggestions ? (
-                            <div className="p-2 text-sm text-gray-500 text-center">🧠 AI အကြံပြုချက်များ ရှာဖွေနေသည်...</div>
+                            <div className="p-2 text-sm text-gray-500 dark:text-gray-400 text-center">🧠 AI အကြံပြုချက်များ ရှာဖွေနေသည်...</div>
                         ) : (
                             suggestions.map(s => (
                                 <div 
                                     key={s}
-                                    className="p-2 hover:bg-blue-100 rounded cursor-pointer text-sm text-gray-700"
+                                    className="p-2 hover:bg-blue-100 dark:hover:bg-blue-900/50 rounded cursor-pointer text-sm text-gray-700 dark:text-gray-300"
                                     onClick={() => handleSelectSuggestion(i, s)}
                                 >
                                     ➕ {s}
@@ -197,7 +198,7 @@ export const SupplierModal: React.FC<SupplierModalProps> = ({ supplier, onClose,
           <button type="submit" className="flex-1 px-6 py-3 rounded-lg font-bold text-white text-lg" style={{ background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)' }}>
             {isEdit ? '✓ သိမ်းဆည်းမည်' : '➕ ထည့်သွင်းမည်'}
           </button>
-          <button type="button" onClick={onClose} className="px-6 py-3 rounded-lg font-semibold bg-gray-200 text-gray-700 hover:bg-gray-300">
+          <button type="button" onClick={onClose} className="px-6 py-3 rounded-lg font-semibold bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500">
             ပယ်ဖျက်မည်
           </button>
         </div>

@@ -23,14 +23,14 @@ const QuantityControl: React.FC<{
 }> = ({ item, updateCartQuantity }) => (
   <div className="flex items-center gap-2">
     <button
-      className="w-8 h-8 rounded-md border-2 border-gray-300 bg-white cursor-pointer font-bold transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500"
+      className="w-8 h-8 rounded-md border-2 border-gray-300 bg-white dark:bg-gray-600 dark:border-gray-500 cursor-pointer font-bold transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500 dark:hover:bg-blue-500"
       onClick={() => updateCartQuantity(item.product_code, item.quantity - 1)}
     >
       −
     </button>
     <span className="font-semibold px-2 w-8 text-center">{item.quantity}</span>
     <button
-      className="w-8 h-8 rounded-md border-2 border-gray-300 bg-white cursor-pointer font-bold transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500"
+      className="w-8 h-8 rounded-md border-2 border-gray-300 bg-white dark:bg-gray-600 dark:border-gray-500 cursor-pointer font-bold transition-colors hover:bg-blue-500 hover:text-white hover:border-blue-500 dark:hover:bg-blue-500"
       onClick={() => updateCartQuantity(item.product_code, item.quantity + 1)}
     >
       +
@@ -61,34 +61,34 @@ export const Cart: React.FC<CartProps> = ({
 
   return (
     <div className="h-full flex flex-col">
-      <div className="p-4 border-b border-gray-200 bg-white">
+      <div className="p-4 border-b border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-xl font-bold text-gray-800">🛒 ဝယ်ယူမည့်စာရင်း</h3>
+          <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">🛒 ဝယ်ယူမည့်စာရင်း</h3>
           <div className="flex items-center gap-2">
             <button
               onClick={openClearCart}
               disabled={cart.length === 0}
-              className="px-3 py-1 rounded-lg text-sm font-semibold bg-red-100 text-red-800 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-3 py-1 rounded-lg text-sm font-semibold bg-red-100 text-red-800 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-red-900 dark:text-red-200"
             >
               🗑️ ရှင်းလင်း
             </button>
             {closeCart && (
-              <button onClick={closeCart} className="md:hidden text-2xl font-bold text-gray-600 hover:text-gray-900">
+              <button onClick={closeCart} className="md:hidden text-2xl font-bold text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
                 ✕
               </button>
             )}
           </div>
         </div>
-        <div className="text-sm text-gray-600">{totalItems} ပစ္စည်း</div>
+        <div className="text-sm text-gray-600 dark:text-gray-400">{totalItems} ပစ္စည်း</div>
       </div>
       
-      <div className="p-4 border-b border-gray-200 bg-white">
-        <label htmlFor="customer-select" className="text-sm font-semibold text-gray-700 block mb-2">👤 ဝယ်ယူသူ ရွေးရန်</label>
+      <div className="p-4 border-b border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700">
+        <label htmlFor="customer-select" className="text-sm font-semibold text-gray-700 dark:text-gray-300 block mb-2">👤 ဝယ်ယူသူ ရွေးရန်</label>
         <select
             id="customer-select"
             value={selectedCustomerId || ''}
             onChange={(e) => setSelectedCustomerId(e.target.value || null)}
-            className="w-full p-2 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500"
+            className="w-full p-2 border border-gray-300 rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500"
         >
             <option value="">-- ဝယ်ယူသူမပါ --</option>
             {customers.map(c => (
@@ -96,7 +96,7 @@ export const Cart: React.FC<CartProps> = ({
             ))}
         </select>
         {selectedCustomer && (
-            <div className="mt-2 text-sm p-2 bg-blue-50 text-blue-700 rounded-md">
+            <div className="mt-2 text-sm p-2 bg-blue-50 text-blue-700 dark:bg-blue-900 dark:text-blue-200 rounded-md">
                 <span className='font-bold'>{selectedCustomer.customer_name}</span> တွင် အမှတ် <span className='font-bold'>{selectedCustomer.loyalty_points || 0}</span> ရှိသည်
             </div>
         )}
@@ -104,49 +104,49 @@ export const Cart: React.FC<CartProps> = ({
 
       <div className="flex-1 overflow-y-auto p-4">
         {cart.length === 0 ? (
-          <div className="text-center py-12 text-gray-500">
+          <div className="text-center py-12 text-gray-500 dark:text-gray-400">
             <div className="text-4xl mb-2">🛒</div>
             <div>စာရင်းအလွတ်</div>
           </div>
         ) : (
           cart.map((item) => (
-            <div key={item.__backendId} className="bg-white border border-gray-200 rounded-lg p-3 mb-2 transition-shadow hover:shadow-md">
+            <div key={item.__backendId} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-3 mb-2 transition-shadow hover:shadow-md">
               <div className="flex justify-between items-start mb-2">
                 <div className="flex-1">
-                  <div className="font-semibold text-gray-800">{item.product_name}</div>
-                  <div className="text-sm text-gray-600">{item.price.toLocaleString()} ကျပ် × {item.quantity} {item.unit || 'ခု'}</div>
+                  <div className="font-semibold text-gray-800 dark:text-gray-100">{item.product_name}</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">{item.price.toLocaleString()} ကျပ် × {item.quantity} {item.unit || 'ခု'}</div>
                 </div>
-                <button onClick={() => removeFromCart(item.product_code)} className="text-red-500 hover:text-red-700 text-xl">
+                <button onClick={() => removeFromCart(item.product_code)} className="text-red-500 hover:text-red-700 dark:hover:text-red-400 text-xl">
                   🗑️
                 </button>
               </div>
               <div className="flex justify-between items-center">
                 <QuantityControl item={item} updateCartQuantity={updateCartQuantity} />
-                <div className="font-bold text-blue-500">{(item.price * item.quantity).toLocaleString()} ကျပ်</div>
+                <div className="font-bold text-blue-500 dark:text-blue-400">{(item.price * item.quantity).toLocaleString()} ကျပ်</div>
               </div>
             </div>
           ))
         )}
       </div>
 
-      <div className="border-t border-gray-200 p-4 bg-white">
+      <div className="border-t border-gray-200 dark:border-gray-700 p-4 bg-white dark:bg-gray-800">
         <div className="space-y-2 mb-4">
           <div className="flex justify-between text-sm">
-            <span className="text-gray-600">စုစုပေါင်း:</span>
-            <span className="font-semibold text-gray-800">{subtotal.toLocaleString()} ကျပ်</span>
+            <span className="text-gray-600 dark:text-gray-400">စုစုပေါင်း:</span>
+            <span className="font-semibold text-gray-800 dark:text-gray-200">{subtotal.toLocaleString()} ကျပ်</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-gray-600">လျှော့စျေး:</span>
-            <span className="font-semibold text-red-500">{discount.toLocaleString()} ကျပ်</span>
+            <span className="text-gray-600 dark:text-gray-400">လျှော့စျေး:</span>
+            <span className="font-semibold text-red-500 dark:text-red-400">{discount.toLocaleString()} ကျပ်</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-gray-600">အခွန် ({(taxRate * 100).toFixed(0)}%):</span>
-            <span className="font-semibold text-gray-800">{Math.round(tax).toLocaleString()} ကျပ်</span>
+            <span className="text-gray-600 dark:text-gray-400">အခွန် ({(taxRate * 100).toFixed(0)}%):</span>
+            <span className="font-semibold text-gray-800 dark:text-gray-200">{Math.round(tax).toLocaleString()} ကျပ်</span>
           </div>
-          <div className="border-t border-gray-200 pt-2">
+          <div className="border-t border-gray-200 dark:border-gray-700 pt-2">
             <div className="flex justify-between">
-              <span className="text-lg font-bold text-gray-800">စုစုပေါင်း:</span>
-              <span className="text-2xl font-bold text-blue-500">{total.toLocaleString()} ကျပ်</span>
+              <span className="text-lg font-bold text-gray-800 dark:text-gray-100">စုစုပေါင်း:</span>
+              <span className="text-2xl font-bold text-blue-500 dark:text-blue-400">{total.toLocaleString()} ကျပ်</span>
             </div>
           </div>
         </div>
@@ -154,7 +154,7 @@ export const Cart: React.FC<CartProps> = ({
           <button
             onClick={openDiscount}
             disabled={cart.length === 0}
-            className="w-full px-4 py-2 rounded-lg font-semibold bg-yellow-200 text-yellow-800 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full px-4 py-2 rounded-lg font-semibold bg-yellow-200 text-yellow-800 disabled:opacity-50 disabled:cursor-not-allowed dark:bg-yellow-800 dark:text-yellow-100"
           >
             💰 လျှော့စျေး/အမှတ်သုံးရန်
           </button>

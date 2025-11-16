@@ -11,14 +11,14 @@ interface CheckoutModalProps {
 }
 
 const paymentMethods = [
-  { name: 'ငွေသား', icon: '💵', bg: 'bg-green-100', text: 'text-green-800' },
-  { name: 'ကတ်', icon: '💳', bg: 'bg-blue-100', text: 'text-blue-800' },
-  { name: 'မိုဘိုင်းငွေ', icon: '📱', bg: 'bg-yellow-100', text: 'text-yellow-800' },
-  { name: 'ဘဏ်လွှဲ', icon: '🏦', bg: 'bg-indigo-100', text: 'text-indigo-800' },
+  { name: 'ငွေသား', icon: '💵', bg: 'bg-green-100 dark:bg-green-900', text: 'text-green-800 dark:text-green-200' },
+  { name: 'ကတ်', icon: '💳', bg: 'bg-blue-100 dark:bg-blue-900', text: 'text-blue-800 dark:text-blue-200' },
+  { name: 'မိုဘိုင်းငွေ', icon: '📱', bg: 'bg-yellow-100 dark:bg-yellow-900', text: 'text-yellow-800 dark:text-yellow-200' },
+  { name: 'ဘဏ်လွှဲ', icon: '🏦', bg: 'bg-indigo-100 dark:bg-indigo-900', text: 'text-indigo-800 dark:text-indigo-200' },
 ];
 
 const NumberPadButton: React.FC<{ onClick: () => void; children: React.ReactNode }> = ({ onClick, children }) => (
-  <button type="button" onClick={onClick} className="p-4 text-2xl font-bold rounded-lg border-2 bg-white transition-all hover:bg-gray-100 hover:scale-105 active:scale-95">
+  <button type="button" onClick={onClick} className="p-4 text-2xl font-bold rounded-lg border-2 bg-white dark:bg-gray-700 dark:border-gray-600 transition-all hover:bg-gray-100 dark:hover:bg-gray-600 hover:scale-105 active:scale-95">
     {children}
   </button>
 );
@@ -75,17 +75,17 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ cart, discount, ta
   
   return (
     <div>
-      <h3 className="text-2xl font-bold mb-6 text-gray-800">💳 ငွေရှင်းရန်</h3>
+      <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">💳 ငွေရှင်းရန်</h3>
       
       <div className="space-y-4 mb-6">
-          <div className="p-4 rounded-lg bg-gray-100 border border-gray-200 text-center">
-              <div className="text-base font-semibold text-gray-600">ပေးချေရမည့် စုစုပေါင်း</div>
-              <div className="text-4xl font-bold text-gray-800 tracking-tight">{total.toLocaleString()} ကျပ်</div>
+          <div className="p-4 rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-center">
+              <div className="text-base font-semibold text-gray-600 dark:text-gray-300">ပေးချေရမည့် စုစုပေါင်း</div>
+              <div className="text-4xl font-bold text-gray-800 dark:text-gray-100 tracking-tight">{total.toLocaleString()} ကျပ်</div>
           </div>
       </div>
       
       <div className="mb-4">
-        <label className="block text-base font-semibold mb-2 text-gray-700">ရရှိသောငွေ (ကျပ်)</label>
+        <label className="block text-base font-semibold mb-2 text-gray-700 dark:text-gray-300">ရရှိသောငွေ (ကျပ်)</label>
         <input 
             type="text" 
             value={paidAmount} 
@@ -95,13 +95,13 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ cart, discount, ta
                     setPaidAmount(val);
                 }
             }}
-            className="w-full p-3 rounded-lg border-2 text-2xl font-bold text-right border-gray-300 focus:border-blue-500 focus:ring-blue-500 transition" 
+            className="w-full p-3 rounded-lg border-2 text-2xl font-bold text-right border-gray-300 dark:bg-gray-700 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 transition" 
         />
       </div>
 
-      <div className="mb-6 p-4 rounded-lg bg-blue-50 flex justify-between items-center">
-        <span className="text-lg font-semibold text-blue-800">ပြန်အမ်းငွေ:</span>
-        <span className="text-2xl font-bold text-blue-800">{change.toLocaleString()} ကျပ်</span>
+      <div className="mb-6 p-4 rounded-lg bg-blue-50 dark:bg-blue-900/50 flex justify-between items-center">
+        <span className="text-lg font-semibold text-blue-800 dark:text-blue-200">ပြန်အမ်းငွေ:</span>
+        <span className="text-2xl font-bold text-blue-800 dark:text-blue-200">{change.toLocaleString()} ကျပ်</span>
       </div>
 
       <div className="mb-6">
@@ -116,7 +116,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ cart, discount, ta
               role="radio"
               aria-checked={paymentMethod === method.name}
               onClick={() => setPaymentMethod(method.name)}
-              className={`p-4 rounded-lg font-bold flex items-center justify-center gap-2 border-2 transition-all ${paymentMethod === method.name ? 'border-blue-500 ring-2 ring-blue-200' : 'border-transparent'} ${method.bg} ${method.text}`}
+              className={`p-4 rounded-lg font-bold flex items-center justify-center gap-2 border-2 transition-all ${paymentMethod === method.name ? 'border-blue-500 dark:border-blue-400 ring-2 ring-blue-200 dark:ring-blue-500/50' : 'border-transparent'} ${method.bg} ${method.text}`}
             >
               {method.icon} {method.name}
             </button>
@@ -132,7 +132,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ cart, discount, ta
       </div>
       <div className="flex gap-3">
         <button onClick={handleSubmit} className="flex-1 p-4 rounded-lg font-bold text-white text-lg" style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)' }}>✓ အတည်ပြုမည်</button>
-        <button onClick={onClose} className="p-4 rounded-lg font-semibold bg-gray-200 text-gray-700">ပယ်ဖျက်</button>
+        <button onClick={onClose} className="p-4 rounded-lg font-semibold bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-200">ပယ်ဖျက်</button>
       </div>
     </div>
   );

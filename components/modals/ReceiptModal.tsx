@@ -25,16 +25,16 @@ export const ReceiptModal: React.FC<ReceiptModalProps> = ({ transaction, setting
 
   return (
     <div className="w-full">
-      <div className="mb-4 flex justify-center gap-2 p-1 bg-gray-200 rounded-lg no-print">
+      <div className="mb-4 flex justify-center gap-2 p-1 bg-gray-200 dark:bg-gray-700 rounded-lg no-print">
         <button
           onClick={() => setFormat('thermal')}
-          className={`px-4 py-2 text-sm font-semibold rounded-md transition-colors ${format === 'thermal' ? 'bg-white text-gray-800 shadow' : 'text-gray-600'}`}
+          className={`px-4 py-2 text-sm font-semibold rounded-md transition-colors ${format === 'thermal' ? 'bg-white dark:bg-gray-600 text-gray-800 dark:text-gray-100 shadow' : 'text-gray-600 dark:text-gray-300'}`}
         >
           🖨️ Thermal
         </button>
         <button
           onClick={() => setFormat('a4')}
-          className={`px-4 py-2 text-sm font-semibold rounded-md transition-colors ${format === 'a4' ? 'bg-white text-gray-800 shadow' : 'text-gray-600'}`}
+          className={`px-4 py-2 text-sm font-semibold rounded-md transition-colors ${format === 'a4' ? 'bg-white dark:bg-gray-600 text-gray-800 dark:text-gray-100 shadow' : 'text-gray-600 dark:text-gray-300'}`}
         >
           📄 A4
         </button>

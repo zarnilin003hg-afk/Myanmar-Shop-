@@ -44,6 +44,8 @@ interface MainLayoutProps {
   create: (item: Omit<AnyData, '__backendId' | 'id'> & { id?: string }) => Promise<{ isOk: boolean }>;
   update: (item: AnyData) => Promise<{ isOk: boolean }>;
   deleteItem: (item: AnyData) => Promise<{ isOk: boolean }>;
+  theme: 'light' | 'dark';
+  setTheme: (theme: 'light' | 'dark') => void;
 }
 
 const modalSizes: { [key in ModalState['type']]?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' } = {
@@ -61,7 +63,7 @@ const modalSizes: { [key in ModalState['type']]?: 'sm' | 'md' | 'lg' | 'xl' | '2
     confirm_clear_cart: 'sm',
 };
 
-export const MainLayout: React.FC<MainLayoutProps> = ({ user, onLogout, data, create, update, deleteItem }) => {
+export const MainLayout: React.FC<MainLayoutProps> = ({ user, onLogout, data, create, update, deleteItem, theme, setTheme }) => {
   const [activeTab, setActiveTab] = useState<Tab>('pos');
   const [cart, setCart] = useState<CartItem[]>([]);
   const [discount, setDiscount] = useState(0);
@@ -563,6 +565,8 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ user, onLogout, data, cr
                   currentUser={user}
                   openUserModal={(u) => setModal({ type: 'user', data: u })}
                   deleteUser={(u) => setModal({ type: 'confirm_delete', data: u })}
+                  theme={theme}
+                  setTheme={setTheme}
                 />;
       default:
         return null;
@@ -570,7 +574,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ user, onLogout, data, cr
   };
 
   return (
-    <div className="h-screen flex flex-col font-[Segoe_UI,Myanmar_Text,Pyidaungsu] bg-gray-100">
+    <div className="h-screen flex flex-col font-[Segoe_UI,Myanmar_Text,Pyidaungsu] bg-gray-100 dark:bg-gray-800">
       <Header 
         storeName={settings.storeName}
         activeTab={activeTab} 

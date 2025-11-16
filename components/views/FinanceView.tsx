@@ -94,11 +94,11 @@ export const FinanceView: React.FC<FinanceViewProps> = ({ transactions, products
     const { totalRevenue, totalCogs, totalProfit, profitMargin, totalTax, periods, paymentMethods } = financialData;
 
     return (
-        <div className="h-full overflow-y-auto p-6 bg-gray-100">
+        <div className="h-full overflow-y-auto p-6 bg-gray-100 dark:bg-gray-900">
             <div className="max-w-7xl mx-auto">
                 <div className="mb-6">
-                    <h2 className="text-3xl font-bold mb-2 text-gray-800">💰 ဘဏ္ဍာရေး ခြုံငုံသုံးသပ်ချက်</h2>
-                    <p className="text-gray-600">သင့်လုပ်ငန်း၏ ငွေကြေးဆိုင်ရာ စွမ်းဆောင်ရည်ကို ကြည့်ရှုပါ</p>
+                    <h2 className="text-3xl font-bold mb-2 text-gray-800 dark:text-gray-100">💰 ဘဏ္ဍာရေး ခြုံငုံသုံးသပ်ချက်</h2>
+                    <p className="text-gray-600 dark:text-gray-400">သင့်လုပ်ငန်း၏ ငွေကြေးဆိုင်ရာ စွမ်းဆောင်ရည်ကို ကြည့်ရှုပါ</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
@@ -109,50 +109,50 @@ export const FinanceView: React.FC<FinanceViewProps> = ({ transactions, products
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div className="rounded-xl shadow-md p-6 bg-white">
-                        <h3 className="text-lg font-bold mb-4 text-gray-800">အရှုံးအမြတ် ရှင်းတမ်း</h3>
+                    <div className="rounded-xl shadow-md p-6 bg-white dark:bg-gray-800">
+                        <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-gray-100">အရှုံးအမြတ် ရှင်းတမ်း</h3>
                         <div className="overflow-x-auto">
                             <table className="w-full text-left min-w-[600px]">
                                 <thead>
-                                    <tr className="border-b">
-                                        <th className="py-2 text-sm font-semibold text-gray-600">ကာလ</th>
-                                        <th className="py-2 text-sm font-semibold text-gray-600 text-right">ဝင်ငွေ</th>
-                                        <th className="py-2 text-sm font-semibold text-gray-600 text-right">ရောင်းကုန်ကျစရိတ်</th>
-                                        <th className="py-2 text-sm font-semibold text-gray-600 text-right">စုစုပေါင်းအမြတ်</th>
+                                    <tr className="border-b dark:border-gray-700">
+                                        <th className="py-2 text-sm font-semibold text-gray-600 dark:text-gray-400">ကာလ</th>
+                                        <th className="py-2 text-sm font-semibold text-gray-600 dark:text-gray-400 text-right">ဝင်ငွေ</th>
+                                        <th className="py-2 text-sm font-semibold text-gray-600 dark:text-gray-400 text-right">ရောင်းကုန်ကျစရိတ်</th>
+                                        <th className="py-2 text-sm font-semibold text-gray-600 dark:text-gray-400 text-right">စုစုပေါင်းအမြတ်</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {periods.map(p => (
-                                        <tr key={p.label} className="border-b last:border-none">
-                                            <td className="py-3 font-semibold text-gray-800">{p.label}</td>
-                                            <td className="py-3 text-right text-green-600">{p.revenue.toLocaleString()}</td>
-                                            <td className="py-3 text-right text-red-600">{p.cogs.toLocaleString()}</td>
-                                            <td className="py-3 text-right font-bold text-blue-600">{p.profit.toLocaleString()}</td>
+                                        <tr key={p.label} className="border-b dark:border-gray-700 last:border-none">
+                                            <td className="py-3 font-semibold text-gray-800 dark:text-gray-200">{p.label}</td>
+                                            <td className="py-3 text-right text-green-600 dark:text-green-400">{p.revenue.toLocaleString()}</td>
+                                            <td className="py-3 text-right text-red-600 dark:text-red-400">{p.cogs.toLocaleString()}</td>
+                                            <td className="py-3 text-right font-bold text-blue-600 dark:text-blue-400">{p.profit.toLocaleString()}</td>
                                         </tr>
                                     ))}
-                                    <tr className="border-b last:border-none bg-gray-50 font-bold">
-                                        <td className="py-3 text-gray-800">စုစုပေါင်း</td>
-                                        <td className="py-3 text-right text-green-700">{totalRevenue.toLocaleString()}</td>
-                                        <td className="py-3 text-right text-red-700">{totalCogs.toLocaleString()}</td>
-                                        <td className="py-3 text-right text-blue-700">{totalProfit.toLocaleString()}</td>
+                                    <tr className="border-b dark:border-gray-700 last:border-none bg-gray-50 dark:bg-gray-700 font-bold">
+                                        <td className="py-3 text-gray-800 dark:text-gray-100">စုစုပေါင်း</td>
+                                        <td className="py-3 text-right text-green-700 dark:text-green-300">{totalRevenue.toLocaleString()}</td>
+                                        <td className="py-3 text-right text-red-700 dark:text-red-300">{totalCogs.toLocaleString()}</td>
+                                        <td className="py-3 text-right text-blue-700 dark:text-blue-300">{totalProfit.toLocaleString()}</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
-                    <div className="rounded-xl shadow-md p-6 bg-white">
-                        <h3 className="text-lg font-bold mb-4 text-gray-800">ငွေပေးချေမှုအလိုက် ဝင်ငွေ</h3>
+                    <div className="rounded-xl shadow-md p-6 bg-white dark:bg-gray-800">
+                        <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-gray-100">ငွေပေးချေမှုအလိုက် ဝင်ငွေ</h3>
                         <div className="space-y-3">
                             {Object.entries(paymentMethods).length > 0 ? (
                                 Object.entries(paymentMethods).map(([method, amount]) => (
-                                    <div key={method} className="flex items-center justify-between p-3 rounded-lg bg-gray-50">
-                                        <span className="font-semibold text-gray-700">{method}</span>
-                                        <span className="font-bold text-gray-800">{amount.toLocaleString()} ကျပ်</span>
+                                    <div key={method} className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
+                                        <span className="font-semibold text-gray-700 dark:text-gray-200">{method}</span>
+                                        <span className="font-bold text-gray-800 dark:text-gray-100">{amount.toLocaleString()} ကျပ်</span>
                                     </div>
                                 ))
                             ) : (
-                                <p className="text-center text-gray-500 py-8">ဒေတာမရှိသေးပါ</p>
+                                <p className="text-center text-gray-500 dark:text-gray-400 py-8">ဒေတာမရှိသေးပါ</p>
                             )}
                         </div>
                     </div>

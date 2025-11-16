@@ -16,7 +16,7 @@ const SupplierCard: React.FC<{ supplier: Supplier; productCount: number; openMod
   const supplierProducts: SupplierProduct[] = supplier.supplier_products ? JSON.parse(supplier.supplier_products) : [];
   
   return (
-    <div className="rounded-xl shadow-md overflow-hidden bg-white flex flex-col">
+    <div className="rounded-xl shadow-md overflow-hidden bg-white dark:bg-gray-800 flex flex-col">
       <div className="p-6 text-white" style={{ background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)' }}>
         <div className="text-4xl mb-3">🏭</div>
         <h3 className="text-xl font-bold mb-1">{supplier.supplier_name}</h3>
@@ -25,22 +25,22 @@ const SupplierCard: React.FC<{ supplier: Supplier; productCount: number; openMod
       <div className="p-6 flex-1 flex flex-col justify-between">
         <div>
           <div className="mb-4">
-            <div className="text-sm font-semibold mb-2 text-gray-600">ဆက်သွယ်ရန်</div>
-            <div className="text-sm mb-1 text-gray-800 truncate">📧 {supplier.supplier_email || '-'}</div>
-            <div className="text-sm text-gray-800">📍 {supplier.supplier_address || '-'}</div>
+            <div className="text-sm font-semibold mb-2 text-gray-600 dark:text-gray-400">ဆက်သွယ်ရန်</div>
+            <div className="text-sm mb-1 text-gray-800 dark:text-gray-200 truncate">📧 {supplier.supplier_email || '-'}</div>
+            <div className="text-sm text-gray-800 dark:text-gray-200">📍 {supplier.supplier_address || '-'}</div>
           </div>
           
           <div className="mb-4">
-            <div className="text-sm font-semibold mb-2 text-gray-600">ရောင်းချနိုင်သော ကုန်ပစ္စည်းအမျိုးအစား ({supplierProducts.length})</div>
+            <div className="text-sm font-semibold mb-2 text-gray-600 dark:text-gray-400">ရောင်းချနိုင်သော ကုန်ပစ္စည်းအမျိုးအစား ({supplierProducts.length})</div>
             <div className="flex flex-wrap gap-2">
               {supplierProducts.slice(0, 3).map(p => <Badge key={p.category} color="info">{p.category}</Badge>)}
               {supplierProducts.length > 3 && <Badge color="info">+{supplierProducts.length - 3}</Badge>}
             </div>
           </div>
           
-          <div className="mb-4 p-3 rounded-lg bg-gray-50">
-            <div className="text-sm text-gray-600">ပေးသွင်းထားသော ကုန်ပစ္စည်း</div>
-            <div className="text-2xl font-bold text-green-600">{productCount} ပစ္စည်း</div>
+          <div className="mb-4 p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
+            <div className="text-sm text-gray-600 dark:text-gray-400">ပေးသွင်းထားသော ကုန်ပစ္စည်း</div>
+            <div className="text-2xl font-bold text-green-600 dark:text-green-400">{productCount} ပစ္စည်း</div>
           </div>
         </div>
         
@@ -69,12 +69,12 @@ export const SuppliersView: React.FC<SuppliersViewProps> = ({ suppliers, product
     const suppliedProducts = products.filter(p => p.supplier && suppliers.some(s => s.supplier_name === p.supplier));
 
   return (
-    <div className="h-full overflow-y-auto p-6 bg-gray-100">
+    <div className="h-full overflow-y-auto p-6 bg-gray-100 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-6">
           <div>
-            <h2 className="text-3xl font-bold mb-2 text-gray-800">🏭 ကုန်ပစ္စည်းပေးသွင်းသူများ စီမံခန့်ခွဲမှု</h2>
-            <p className="text-gray-600">သင့်လုပ်ငန်းအတွက် ကုန်ပစ္စည်းပေးသွင်းသူများနှင့် ၎င်းတို့၏ ကုန်ပစ္စည်းများ</p>
+            <h2 className="text-3xl font-bold mb-2 text-gray-800 dark:text-gray-100">🏭 ကုန်ပစ္စည်းပေးသွင်းသူများ စီမံခန့်ခွဲမှု</h2>
+            <p className="text-gray-600 dark:text-gray-400">သင့်လုပ်ငန်းအတွက် ကုန်ပစ္စည်းပေးသွင်းသူများနှင့် ၎င်းတို့၏ ကုန်ပစ္စည်းများ</p>
           </div>
           {currentUserRole === 'Admin' && (
             <button
@@ -88,13 +88,13 @@ export const SuppliersView: React.FC<SuppliersViewProps> = ({ suppliers, product
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <StatCard title="စုစုပေါင်းပေးသွင်းသူ" value={suppliers.length.toString()} color="plain" valueColor="text-gray-800" />
-          <StatCard title="ကုန်ပစ္စည်းအမျိုးအစား" value={allCategories.size.toString()} color="plain" valueColor="text-yellow-600" />
-          <StatCard title="ပေးသွင်းသောပစ္စည်း" value={suppliedProducts.length.toString()} color="plain" valueColor="text-green-600" />
+          <StatCard title="စုစုပေါင်းပေးသွင်းသူ" value={suppliers.length.toString()} color="plain" valueColor="text-gray-800 dark:text-gray-100" titleColor="dark:text-gray-400"/>
+          <StatCard title="ကုန်ပစ္စည်းအမျိုးအစား" value={allCategories.size.toString()} color="plain" valueColor="text-yellow-600 dark:text-yellow-400" titleColor="dark:text-gray-400"/>
+          <StatCard title="ပေးသွင်းသောပစ္စည်း" value={suppliedProducts.length.toString()} color="plain" valueColor="text-green-600 dark:text-green-400" titleColor="dark:text-gray-400"/>
         </div>
 
         {suppliers.length === 0 ? (
-          <div className="col-span-full text-center py-12 text-gray-500 bg-white rounded-xl shadow-md">
+          <div className="col-span-full text-center py-12 text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 rounded-xl shadow-md">
             <div className="text-6xl mb-4">🏭</div>
             <div className="text-xl font-semibold mb-2">ပေးသွင်းသူမရှိသေးပါ</div>
             <div className="text-sm">ပေးသွင်းသူအသစ်ထည့်ပြီး ၎င်းတို့၏ ကုန်ပစ္စည်းများကို စီမံပါ</div>

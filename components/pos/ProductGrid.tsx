@@ -12,7 +12,7 @@ interface ProductGridProps {
 export const ProductGrid: React.FC<ProductGridProps> = ({ products, addToCart, selectedCategory }) => {
   if (products.length === 0) {
     return (
-      <div className="flex-1 flex items-center justify-center text-center text-gray-500">
+      <div className="flex-1 flex items-center justify-center text-center text-gray-500 dark:text-gray-400">
         <div>
           <div className="text-6xl mb-4">📦</div>
           <div className="text-xl font-semibold mb-2">ကုန်ပစ္စည်းမရှိပါ</div>

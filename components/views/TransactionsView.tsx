@@ -188,12 +188,12 @@ export const TransactionsView: React.FC<TransactionsViewProps> = ({ transactions
 
   return (
     <>
-      <div className="h-full overflow-y-auto p-4 md:p-6 bg-gray-100 no-print">
+      <div className="h-full overflow-y-auto p-4 md:p-6 bg-gray-100 dark:bg-gray-900 no-print">
         <div className="max-w-7xl mx-auto">
           <div className="flex justify-between items-center mb-6">
             <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-800">📊 အရောင်းမှတ်တမ်း</h2>
-              <p className="hidden md:block text-gray-600">အရောင်းအားလုံး၏ အသေးစိတ်မှတ်တမ်း</p>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2 text-gray-800 dark:text-gray-100">📊 အရောင်းမှတ်တမ်း</h2>
+              <p className="hidden md:block text-gray-600 dark:text-gray-400">အရောင်းအားလုံး၏ အသေးစိတ်မှတ်တမ်း</p>
             </div>
             <div className="flex items-center gap-3">
               <button
@@ -215,12 +215,12 @@ export const TransactionsView: React.FC<TransactionsViewProps> = ({ transactions
             </div>
           </div>
 
-          <div className="rounded-xl shadow-md p-4 bg-white mb-6">
-              <h3 className="font-bold text-lg mb-3 text-gray-700">🔍 စစ်ထုတ်ရန်</h3>
+          <div className="rounded-xl shadow-md p-4 bg-white dark:bg-gray-800 mb-6">
+              <h3 className="font-bold text-lg mb-3 text-gray-700 dark:text-gray-200">🔍 စစ်ထုတ်ရန်</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                      <label className="text-sm font-semibold text-gray-600 mb-1 block">အချိန်ကာလ</label>
-                      <select value={dateRange} onChange={e => setDateRange(e.target.value)} className="w-full p-2 border border-gray-300 rounded-lg bg-white">
+                      <label className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1 block">အချိန်ကာလ</label>
+                      <select value={dateRange} onChange={e => setDateRange(e.target.value)} className="w-full p-2 border border-gray-300 rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600">
                           <option value="all">အားလုံး</option>
                           <option value="today">ယနေ့</option>
                           <option value="week">ယခုအပတ်</option>
@@ -228,52 +228,52 @@ export const TransactionsView: React.FC<TransactionsViewProps> = ({ transactions
                       </select>
                   </div>
                   <div>
-                      <label className="text-sm font-semibold text-gray-600 mb-1 block">ငွေပေးချေမှု</label>
-                      <select value={paymentMethod} onChange={e => setPaymentMethod(e.target.value)} className="w-full p-2 border border-gray-300 rounded-lg bg-white">
+                      <label className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1 block">ငွေပေးချေမှု</label>
+                      <select value={paymentMethod} onChange={e => setPaymentMethod(e.target.value)} className="w-full p-2 border border-gray-300 rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600">
                           {uniquePaymentMethods.map(method => <option key={method} value={method}>{method === 'all' ? 'အားလုံး' : method}</option>)}
                       </select>
                   </div>
                   <div>
-                      <label className="text-sm font-semibold text-gray-600 mb-1 block">ဝယ်ယူသူ</label>
-                      <select value={customerId} onChange={e => setCustomerId(e.target.value)} className="w-full p-2 border border-gray-300 rounded-lg bg-white">
+                      <label className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1 block">ဝယ်ယူသူ</label>
+                      <select value={customerId} onChange={e => setCustomerId(e.target.value)} className="w-full p-2 border border-gray-300 rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600">
                           <option value="all">အားလုံး</option>
                           {customers.map(c => <option key={c.__backendId} value={c.__backendId}>{c.customer_name}</option>)}
                       </select>
                   </div>
               </div>
               <div className="mt-4">
-                  <label className="text-sm font-semibold text-gray-600 mb-1 block">အထွေထွေရှာဖွေရန်</label>
+                  <label className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-1 block">အထွေထွေရှာဖွေရန်</label>
                   <input
                       type="text"
                       placeholder="Transaction ID, ဝယ်ယူသူ, ကုန်ပစ္စည်း..."
                       value={inputValue}
                       onChange={(e) => setInputValue(e.target.value)}
-                      className="w-full p-2 border border-gray-300 rounded-lg bg-white"
+                      className="w-full p-2 border border-gray-300 rounded-lg bg-white dark:bg-gray-700 dark:border-gray-600"
                   />
               </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-              <StatCard title="အရောင်း" value={totalTransactions.toString()} color="plain" valueColor='text-gray-800' />
-              <StatCard title="စုစုပေါင်းဝင်ငွေ" value={`${totalAmount.toLocaleString()}`} unit="ကျပ်" color="plain" valueColor='text-green-600' />
-              <StatCard title="စုစုပေါင်းအမြတ်" value={`${totalProfit.toLocaleString()}`} unit="ကျပ်" color="plain" valueColor='text-blue-600' />
+              <StatCard title="အရောင်း" value={totalTransactions.toString()} color="plain" valueColor='text-gray-800 dark:text-gray-100' titleColor="dark:text-gray-400" />
+              <StatCard title="စုစုပေါင်းဝင်ငွေ" value={`${totalAmount.toLocaleString()}`} unit="ကျပ်" color="plain" valueColor='text-green-600 dark:text-green-400' titleColor="dark:text-gray-400"/>
+              <StatCard title="စုစုပေါင်းအမြတ်" value={`${totalProfit.toLocaleString()}`} unit="ကျပ်" color="plain" valueColor='text-blue-600 dark:text-blue-400' titleColor="dark:text-gray-400"/>
           </div>
 
           {/* Desktop Table */}
-          <div className="rounded-xl shadow-md overflow-hidden bg-white hidden md:block">
+          <div className="rounded-xl shadow-md overflow-hidden bg-white dark:bg-gray-800 hidden md:block">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-50">
+                <thead className="bg-gray-50 dark:bg-gray-700">
                   <tr>
                     {['ID', 'ရက်စွဲ', 'ဝယ်ယူသူ', 'ပစ္စည်း', 'စုစုပေါင်း', 'အမြတ်', 'ငွေပေးချေမှု', 'လုပ်ဆောင်ချက်'].map(h => (
-                      <th key={h} className="px-6 py-3 text-left text-sm font-semibold text-gray-600">{h}</th>
+                      <th key={h} className="px-6 py-3 text-left text-sm font-semibold text-gray-600 dark:text-gray-300">{h}</th>
                     ))}
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="dark:text-gray-200">
                   {filteredTransactions.length === 0 ? (
                     <tr>
-                      <td colSpan={8} className="px-6 py-12 text-center text-gray-500">
+                      <td colSpan={8} className="px-6 py-12 text-center text-gray-500 dark:text-gray-400">
                         <div className="text-5xl mb-3">📊</div>
                         <div className="text-lg">ရလဒ်နှင့်ကိုက်ညီသော အရောင်းမှတ်တမ်းမရှိပါ</div>
                       </td>
@@ -284,16 +284,16 @@ export const TransactionsView: React.FC<TransactionsViewProps> = ({ transactions
                       const customer = customers.find(c => c.__backendId === t.customer_id);
                       const profit = calculateProfit(t);
                       return (
-                        <tr key={t.__backendId} className="border-t hover:bg-gray-50">
+                        <tr key={t.__backendId} className="border-t dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
                           <td className="px-6 py-4">
-                            <div className="font-semibold text-blue-600">{t.transaction_id}</div>
+                            <div className="font-semibold text-blue-600 dark:text-blue-400">{t.transaction_id}</div>
                             {t.type === 'return' ? <Badge color="warning">ပြန်သွင်း</Badge> : <Badge color="success">ရောင်း</Badge>}
                           </td>
-                          <td className="px-6 py-4 text-gray-600">{new Date(t.transaction_date).toLocaleDateString('my-MM')}</td>
-                          <td className="px-6 py-4 text-gray-600">{customer?.customer_name || '-'}</td>
-                          <td className="px-6 py-4 text-gray-800">{items.length} ခု</td>
-                          <td className="px-6 py-4 font-bold text-gray-800">{t.total_amount.toLocaleString()} ကျပ်</td>
-                          <td className={`px-6 py-4 font-bold ${profit >= 0 ? 'text-green-600' : 'text-red-600'}`}>{profit.toLocaleString()} ကျပ်</td>
+                          <td className="px-6 py-4 text-gray-600 dark:text-gray-400">{new Date(t.transaction_date).toLocaleDateString('my-MM')}</td>
+                          <td className="px-6 py-4 text-gray-600 dark:text-gray-400">{customer?.customer_name || '-'}</td>
+                          <td className="px-6 py-4 text-gray-800 dark:text-gray-200">{items.length} ခု</td>
+                          <td className="px-6 py-4 font-bold text-gray-800 dark:text-gray-100">{t.total_amount.toLocaleString()} ကျပ်</td>
+                          <td className={`px-6 py-4 font-bold ${profit >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>{profit.toLocaleString()} ကျပ်</td>
                           <td className="px-6 py-4"><Badge color="info">{t.payment_method}</Badge></td>
                           <td className="px-6 py-4">
                             <button onClick={() => viewTransaction(t)} className="px-3 py-2 rounded-lg text-sm font-semibold text-white bg-blue-500 hover:bg-blue-600 mr-2">👁️ ကြည့်ရန်</button>
@@ -311,7 +311,7 @@ export const TransactionsView: React.FC<TransactionsViewProps> = ({ transactions
           {/* Mobile Card List */}
           <div className="md:hidden space-y-3">
               {filteredTransactions.length === 0 ? (
-                  <div className="px-6 py-12 text-center text-gray-500 bg-white rounded-lg shadow">
+                  <div className="px-6 py-12 text-center text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 rounded-lg shadow">
                       <div className="text-5xl mb-3">📊</div>
                       <div className="text-lg">ရလဒ်နှင့်ကိုက်ညီသော အရောင်းမှတ်တမ်းမရှိပါ</div>
                   </div>
@@ -320,28 +320,28 @@ export const TransactionsView: React.FC<TransactionsViewProps> = ({ transactions
                       const customer = customers.find(c => c.__backendId === t.customer_id);
                       const profit = calculateProfit(t);
                       return (
-                          <div key={t.__backendId} className="bg-white rounded-lg shadow p-4">
+                          <div key={t.__backendId} className="bg-white dark:bg-gray-800 rounded-lg shadow p-4">
                               <div className="flex justify-between items-start">
                                   <div>
-                                      <div className="font-bold text-blue-600">{t.transaction_id}</div>
-                                      <div className="text-sm text-gray-500">{new Date(t.transaction_date).toLocaleString('my-MM')}</div>
+                                      <div className="font-bold text-blue-600 dark:text-blue-400">{t.transaction_id}</div>
+                                      <div className="text-sm text-gray-500 dark:text-gray-400">{new Date(t.transaction_date).toLocaleString('my-MM')}</div>
                                       {t.type === 'return' ? <Badge color="warning">ပြန်သွင်း</Badge> : <Badge color="success">ရောင်း</Badge>}
                                   </div>
                                   <Badge color="info">{t.payment_method}</Badge>
                               </div>
-                              <div className="border-t my-2"></div>
-                              <div className="text-sm text-gray-700 mb-2">{customer?.customer_name || 'ဝယ်ယူသူမပါ'}</div>
+                              <div className="border-t dark:border-gray-700 my-2"></div>
+                              <div className="text-sm text-gray-700 dark:text-gray-300 mb-2">{customer?.customer_name || 'ဝယ်ယူသူမပါ'}</div>
                               <div className="flex justify-between items-center mb-3">
                                   <div>
-                                      <div className="text-xs text-gray-500">စုစုပေါင်း</div>
-                                      <div className="font-bold text-lg text-gray-800">{t.total_amount.toLocaleString()} ကျပ်</div>
+                                      <div className="text-xs text-gray-500 dark:text-gray-400">စုစုပေါင်း</div>
+                                      <div className="font-bold text-lg text-gray-800 dark:text-gray-100">{t.total_amount.toLocaleString()} ကျပ်</div>
                                   </div>
                                   <div>
-                                      <div className="text-xs text-gray-500">အမြတ်</div>
-                                      <div className={`font-bold text-lg ${profit >= 0 ? 'text-green-600' : 'text-red-600'}`}>{profit.toLocaleString()} ကျပ်</div>
+                                      <div className="text-xs text-gray-500 dark:text-gray-400">အမြတ်</div>
+                                      <div className={`font-bold text-lg ${profit >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>{profit.toLocaleString()} ကျပ်</div>
                                   </div>
                               </div>
-                              <div className="flex gap-2 border-t pt-3">
+                              <div className="flex gap-2 border-t dark:border-gray-700 pt-3">
                                 <button onClick={() => viewTransaction(t)} className="flex-1 text-sm py-2 rounded-lg font-semibold text-white bg-blue-500 hover:bg-blue-600">👁️ အသေးစိတ်</button>
                                 {t.type === 'sale' && <button onClick={() => openReturnModal(t)} className="flex-1 text-sm py-2 rounded-lg font-semibold text-white bg-orange-500 hover:bg-orange-600">↩️ ပြန်သွင်း</button>}
                               </div>

@@ -9,10 +9,33 @@ import { api } from './services/api';
 const MainLayout = lazy(() => import('./components/MainLayout').then(module => ({ default: module.MainLayout })));
 
 const FullPageSpinner = () => (
-    <div className="h-screen w-screen flex items-center justify-center bg-gray-100">
+    <div className="h-screen w-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
         <div className="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-blue-600"></div>
     </div>
 );
+
+const useTheme = () => {
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      const storedTheme = window.localStorage.getItem('theme');
+      if (storedTheme) return storedTheme;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    return 'light';
+  });
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    window.localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  return [theme, setTheme];
+};
 
 
 export default function App() {
@@ -20,6 +43,7 @@ export default function App() {
   const [data, setData] = useState<AnyData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [theme, setTheme] = useTheme();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -106,6 +130,8 @@ export default function App() {
         create={createItem}
         update={updateItem}
         deleteItem={deleteItem}
+        theme={theme as 'light' | 'dark'}
+        setTheme={setTheme as (theme: 'light' | 'dark') => void}
       />
     </Suspense>
   );

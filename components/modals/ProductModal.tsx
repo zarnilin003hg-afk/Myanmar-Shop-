@@ -206,6 +206,9 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, suppliers, 
     }
   };
 
+  const inputStyle = "w-full px-4 py-2 border rounded-lg border-gray-300 dark:bg-gray-700 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500";
+  const labelStyle = "block text-sm font-semibold mb-2 text-gray-700 dark:text-gray-300";
+
 
   return (
     <>
@@ -216,21 +219,21 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, suppliers, 
         />
       )}
       <div>
-        <h3 className="text-2xl font-bold mb-6 text-gray-800">{isEdit ? 'ကုန်ပစ္စည်းပြင်ဆင်ရန်' : 'ကုန်ပစ္စည်းအသစ်ထည့်ရန်'}</h3>
+        <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">{isEdit ? 'ကုန်ပစ္စည်းပြင်ဆင်ရန်' : 'ကုန်ပစ္စည်းအသစ်ထည့်ရန်'}</h3>
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-sm font-semibold mb-2 text-gray-700">ကုန်ပစ္စည်းကုဒ်</label>
-              <input type="text" name="product_code" value={formData.product_code} onChange={handleChange} required className="w-full px-4 py-2 border rounded-lg border-gray-300" />
+              <label className={labelStyle}>ကုန်ပစ္စည်းကုဒ်</label>
+              <input type="text" name="product_code" value={formData.product_code} onChange={handleChange} required className={inputStyle} />
             </div>
             <div>
-              <label className="block text-sm font-semibold mb-2 text-gray-700">Barcode</label>
+              <label className={labelStyle}>Barcode</label>
               <div className="flex items-center gap-2">
-                <input type="text" name="barcode" value={formData.barcode} onChange={handleChange} className="w-full px-4 py-2 border rounded-lg border-gray-300" placeholder="အလိုအလျောက်ထုတ်လုပ်မည်" />
+                <input type="text" name="barcode" value={formData.barcode} onChange={handleChange} className={inputStyle} placeholder="အလိုအလျောက်ထုတ်လုပ်မည်" />
                 <button
                     type="button"
                     onClick={handleGenerateBarcode}
-                    className="p-2 h-full aspect-square rounded-lg bg-gray-200 hover:bg-gray-300 text-xl shrink-0"
+                    className="p-2 h-full aspect-square rounded-lg bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 text-xl shrink-0"
                     title="Generate Barcode"
                   >
                     #️⃣
@@ -239,7 +242,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, suppliers, 
                   <button
                     type="button"
                     onClick={() => setIsScanning(true)}
-                    className="p-2 h-full aspect-square rounded-lg bg-gray-200 hover:bg-gray-300 text-xl shrink-0"
+                    className="p-2 h-full aspect-square rounded-lg bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 text-xl shrink-0"
                     title="Scan Barcode"
                   >
                     📷
@@ -250,15 +253,15 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, suppliers, 
           </div>
           
           <div className="mb-4">
-            <label className="block text-sm font-semibold mb-2 text-gray-700">ပေးသွင်းသူ</label>
-            <select name="supplier" value={formData.supplier} onChange={handleChange} required className="w-full px-4 py-2 border rounded-lg border-gray-300 bg-white">
+            <label className={labelStyle}>ပေးသွင်းသူ</label>
+            <select name="supplier" value={formData.supplier} onChange={handleChange} required className={`${inputStyle} bg-white dark:bg-gray-700`}>
               <option value="">-- ပေးသွင်းသူရွေးပါ --</option>
               {suppliers.map(s => <option key={s.__backendId} value={s.supplier_name}>{s.supplier_name}</option>)}
             </select>
           </div>
           
           <div className="mb-4">
-              <label className="block text-sm font-semibold mb-2 text-gray-700">ကုန်ပစ္စည်း</label>
+              <label className={labelStyle}>ကုန်ပစ္စည်း</label>
               <div className="flex items-center gap-3">
                   <select 
                       name="product_selection"
@@ -266,7 +269,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, suppliers, 
                       onChange={handleProductSelectionChange} 
                       required 
                       disabled={!formData.supplier} 
-                      className="flex-1 w-full px-4 py-2 border rounded-lg border-gray-300 bg-white disabled:bg-gray-100"
+                      className={`flex-1 ${inputStyle} bg-white dark:bg-gray-700 disabled:bg-gray-100 dark:disabled:bg-gray-600`}
                   >
                       <option value="">-- ကုန်ပစ္စည်းရွေးပါ --</option>
                       {supplierProducts.map(cat => (
@@ -278,7 +281,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, suppliers, 
                       ))}
                   </select>
                   <div className="relative w-12 h-12 shrink-0">
-                    <div className="w-full h-full flex items-center justify-center bg-gray-100 rounded-lg text-3xl">
+                    <div className="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-gray-700 rounded-lg text-3xl">
                         {isIconLoading ? <div className="animate-spin text-xl">⚙️</div> : icon || '📦'}
                     </div>
                     <button
@@ -295,7 +298,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, suppliers, 
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-semibold mb-2 text-gray-700">အမျိုးအစား</label>
+            <label className={labelStyle}>အမျိုးအစား</label>
             <input 
               type="text" 
               name="category" 
@@ -303,41 +306,41 @@ export const ProductModal: React.FC<ProductModalProps> = ({ product, suppliers, 
               readOnly
               required
               placeholder="ကုန်ပစ္စည်းရွေးချယ်ပြီးနောက် အလိုအလျောက်ဖြည့်ပါမည်"
-              className="w-full px-4 py-2 border rounded-lg border-gray-300 bg-gray-100" 
+              className={`${inputStyle} bg-gray-100 dark:bg-gray-600`} 
             />
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-semibold mb-2 text-gray-700">ယူနစ်</label>
-            <input type="text" name="unit" value={formData.unit} onChange={handleChange} required className="w-full px-4 py-2 border rounded-lg border-gray-300" />
+            <label className={labelStyle}>ယူနစ်</label>
+            <input type="text" name="unit" value={formData.unit} onChange={handleChange} required className={inputStyle} />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
-              <label className="block text-sm font-semibold mb-2 text-gray-700">ဝယ်ဈေး (ကျပ်)</label>
-              <input type="number" name="cost" value={formData.cost} onChange={handleChange} required min="0" className="w-full px-4 py-2 border rounded-lg border-gray-300" />
+              <label className={labelStyle}>ဝယ်ဈေး (ကျပ်)</label>
+              <input type="number" name="cost" value={formData.cost} onChange={handleChange} required min="0" className={inputStyle} />
             </div>
             <div>
-              <label className="block text-sm font-semibold mb-2 text-gray-700">ရောင်းဈေး (ကျပ်)</label>
-              <input type="number" name="price" value={formData.price} onChange={handleChange} required min="0" className="w-full px-4 py-2 border rounded-lg border-gray-300" />
+              <label className={labelStyle}>ရောင်းဈေး (ကျပ်)</label>
+              <input type="number" name="price" value={formData.price} onChange={handleChange} required min="0" className={inputStyle} />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <div>
-              <label className="block text-sm font-semibold mb-2 text-gray-700">အရေအတွက်</label>
-              <input type="number" name="quantity" value={formData.quantity} onChange={handleChange} required min="0" className="w-full px-4 py-2 border rounded-lg border-gray-300" />
+              <label className={labelStyle}>အရေအတွက်</label>
+              <input type="number" name="quantity" value={formData.quantity} onChange={handleChange} required min="0" className={inputStyle} />
             </div>
             <div>
-              <label className="block text-sm font-semibold mb-2 text-gray-700">Reorder Level</label>
-              <input type="number" name="reorder_level" value={formData.reorder_level} onChange={handleChange} required min="0" className="w-full px-4 py-2 border rounded-lg border-gray-300" />
+              <label className={labelStyle}>Reorder Level</label>
+              <input type="number" name="reorder_level" value={formData.reorder_level} onChange={handleChange} required min="0" className={inputStyle} />
             </div>
           </div>
           <div className="flex gap-3">
             <button type="submit" className="flex-1 px-6 py-3 rounded-lg font-semibold text-white bg-blue-500 hover:bg-blue-600">
               {isEdit ? '✓ သိမ်းဆည်းမည်' : '➕ ထည့်မည်'}
             </button>
-            <button type="button" onClick={onClose} className="flex-1 px-6 py-3 rounded-lg font-semibold bg-gray-200 text-gray-700 hover:bg-gray-300">
+            <button type="button" onClick={onClose} className="flex-1 px-6 py-3 rounded-lg font-semibold bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-600 dark:text-gray-200 dark:hover:bg-gray-500">
               ပယ်ဖျက်မည်
             </button>
           </div>
